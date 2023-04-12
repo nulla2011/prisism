@@ -1,0 +1,30 @@
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import MainMenu from '@renderer/views/MainMenu.vue';
+import Commu from '@renderer/views/Commu.vue';
+
+const metaRouters = import.meta.glob('./modules/*.ts', { eager: true, import: 'default' });
+const routeList: RouteRecordRaw[] = [];
+Object.keys(metaRouters).forEach((item) => {
+  const mod = metaRouters[item] || {};
+  const modList = Array.isArray(mod) ? mod : [mod];
+  routeList.push(...modList);
+});
+let routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'home',
+    component: MainMenu,
+  },
+  {
+    path: '/commu',
+    name: 'commu',
+    component: Commu,
+  },
+];
+routes = routes.concat(routeList);
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+
+export default router;
