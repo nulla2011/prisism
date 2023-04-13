@@ -1,10 +1,10 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron';
+import { app, shell, BrowserWindow } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
-import { writeFileSync, readFileSync } from 'fs';
 import setPath from './utils/setPath';
 import init from './init';
+import ipc from './ipc';
 
 function createWindow() {
   // Create the browser window.
@@ -61,7 +61,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
   init();
-  ipcMain.on('touchFile', () => {});
+  ipc();
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
