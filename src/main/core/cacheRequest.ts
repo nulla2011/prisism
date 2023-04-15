@@ -4,7 +4,12 @@ import path from 'path';
 
 const CACHE_PATH = 'request_cache';
 const url2path = (url: string) => {
-  return path.join(app.getPath('userData'), CACHE_PATH, url.split('?')[0], url.split('=')[1]);
+  return path.join(
+    app.getPath('userData'),
+    CACHE_PATH,
+    url.split('?')[0],
+    url.split('=')[1] + '.json',
+  );
 };
 export function cacheExist(url: string) {
   return existsSync(url2path(url));

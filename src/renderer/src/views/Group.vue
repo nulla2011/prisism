@@ -18,7 +18,7 @@ import idols from "@renderer/shared/constants/idols";
 const route = useRoute();
 let idolList: Ref<typeof idols> = ref(usePickIdols(route.params.groupName as string))
 // onMounted(() => idolList.value = 
-watch(() => route.params.groupName, (value) => idolList.value = usePickIdols(value as string))
+// watch(() => route.params.groupName, (value) => idolList.value = usePickIdols(value as string))
 
 const reverseName = (name: string) => {
   return name.replace(/^(\w+)_(\w+)$/, "$2_$1");

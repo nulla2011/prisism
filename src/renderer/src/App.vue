@@ -1,10 +1,15 @@
 <template>
   <main>
-    <RouterView v-slot="{ Component }">
+    <RouterView v-slot="{ Component, route }">
       <template v-if="Component">
         <button v-show="$route.name !== 'home'" class="back" @click="$router.back()"></button>
-        <Suspense>
-          <component :is="Component"></component>
+        <Suspense timeout="0">
+          <template #default>
+            <component :is="Component" :key="route.path"></component>
+          </template>
+          <template #fallback>
+            <div v-loading.fullscreen.lock="true" element-loading-background="rgba(122, 122, 122, 0.8)"></div>
+          </template>
         </Suspense>
       </template>
     </RouterView>

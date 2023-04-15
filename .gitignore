@@ -8,3 +8,4 @@ out
 *.ttf
 build
 electron*.mjs
+resources
