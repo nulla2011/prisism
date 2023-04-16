@@ -4,7 +4,7 @@ import { cacheExist, readCache, writeCache } from './cacheRequest';
 export default async (url: string) => {
   if (cacheExist(url)) {
     let cache = readCache(url);
-    if (cache.version == global.dbVersion) {
+    if (!global.dbVersion || cache.version == global.dbVersion) {
       return cache.data;
     }
   }

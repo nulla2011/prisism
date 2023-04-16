@@ -3,7 +3,7 @@
     <div class="img-container w-full h-auto overflow-hidden">
       <el-image :src="data.imagesrc" class="image duration-200" />
     </div>
-    <div class="text text-center p-3 text-xl font-sans font-bold bg-white">{{ data.name }}</div>
+    <div class="text text-center p-1 font-bold bg-white">{{ data.name }}</div>
   </el-card>
 </template>
 <script setup lang="ts">
@@ -19,6 +19,7 @@ let props = defineProps<{ data: { name: string, roman: string, imagesrc: string 
 }
 
 .text {
-  font-family: yuanti;
+  font-family: HummingStd;
+  font-size: 24px;
 }
 </style>

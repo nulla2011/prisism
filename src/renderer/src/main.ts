@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import './assets/css/reset.scss';
 import './assets/css/tailwind.css';
-import './assets/css/global.css';
+import './styles/global.scss';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import './styles/element-theme.scss';

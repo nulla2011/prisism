@@ -1,5 +1,8 @@
 <template>
-  <el-row class="top-28 justify-center" type="flex">
+  <div class="h-32 flex justify-center pt-4"><img
+      :src="useGetUrlHash('images/content/unit/logo/', idolList[0].unitId.padStart(3, '0'), 'png')" alt="unit logo"
+      class="unit-logo "></div>
+  <el-row class="top-8 justify-center" type="flex">
     <el-col v-for="idol in idolList" :span="5" class="card-link">
       <router-link :to="{ name: 'idol', params: { idolName: idol.roman } }">
         <idol-card
@@ -14,6 +17,7 @@ import { watch, Ref, ref } from "vue";
 import { useRoute } from "vue-router";
 import usePickIdols from "@renderer/shared/composables/usePickIdols";
 import idols from "@renderer/shared/constants/idols";
+import useGetUrlHash from "@renderer/shared/composables/useGetUrlHash";
 
 const route = useRoute();
 let idolList: Ref<typeof idols> = ref(usePickIdols(route.params.groupName as string))
