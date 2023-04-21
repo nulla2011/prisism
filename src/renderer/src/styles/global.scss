@@ -1,12 +1,39 @@
 @font-face {
   font-family: yuanti;
-  src: url('resources/font/yuanti.ttf');
+  src: url("@renderer/assets/font/yuanti.ttf");
 }
 @font-face {
   font-family: HummingStd;
-  src: url('resources/font/primula-HummingStd-E-1.woff2');
+  src: url("@renderer/assets/font/primula-HummingStd-E-1.woff2");
 }
 @font-face {
   font-family: HummingStd;
-  src: url('resources/font/primula-HummingStd-E-2.woff2');
+  src: url("@renderer/assets/font/primula-HummingStd-E-2.woff2");
+}
+
+:root {
+  --text-color: #4f454b;
+  --scale-effect: scale(1.1);
+}
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #837987;
+    border-radius: 10px;
+    border-width: 5px;
+    border-color: transparent;
+    border-style: solid;
+    background-clip: content-box;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: white;
+    width: 20px;
+    border-radius: 20px;
+    border: 2px solid #615466;
+  }
+}
+html {
+  @include scrollbar;
 }

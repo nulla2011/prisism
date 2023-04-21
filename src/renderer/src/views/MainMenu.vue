@@ -1,19 +1,20 @@
 <template>
   <el-row justify="space-evenly" class="top-36 h-20 mx-24">
     <el-col :span="6">
-      <button class="menu-button">
-        <span data-text="偶像">偶像</span>
-        <el-dropdown class="justify-self-end icon" size="large">
-          <down theme="outline" size="42" fill="#514a80" />
-          <template #dropdown>
-            <el-dropdown-menu>
-              <a class="w-52 h-full" v-for="(value, name) in groups" @click="toGroup(name)">
-                <el-dropdown-item> {{ value }} </el-dropdown-item>
-              </a>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </button>
+      <router-link to="/all-idol">
+        <button class="menu-button">
+          <span data-text="偶像">偶像</span>
+          <el-dropdown class="icon justify-self-end" size="large">
+            <down theme="outline" size="42" fill="#514a80" />
+            <template #dropdown>
+              <el-dropdown-menu>
+                <a class="w-52 h-full" v-for="(value, name) in groups" @click="toGroup(name)">
+                  <el-dropdown-item> {{ value }} </el-dropdown-item>
+                </a>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </button></router-link>
     </el-col>
     <el-col :span="6"><button class="menu-button">
         <span data-text="音乐">音乐</span>
@@ -26,9 +27,11 @@
     <el-col :span="6"><button class="menu-button">
         <span data-text="衣装">衣装</span>
       </button></el-col>
-    <el-col :span="6"> <router-link to="/commu"><button class="menu-button">
+    <el-col :span="6">
+      <router-link to="/commu"><button class="menu-button">
           <span data-text="剧情">剧情</span>
-        </button> </router-link></el-col>
+        </button>
+      </router-link></el-col>
     <el-col :span="6"><button class="menu-button">
         <span data-text="四格漫画">四格漫画</span>
       </button></el-col>
@@ -73,7 +76,7 @@ const toGroup = (group: string) => {
     // width: @width * 1.08;
     // translate: @width * -0.04 @height * -0.04;
     // font-size: @font* 1.08;
-    transform: scale(1.1);
+    transform: var(--scale-effect);
   }
 
   .icon {

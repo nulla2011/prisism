@@ -5,6 +5,7 @@ import { ElMessage } from 'element-plus';
 // Custom APIs for renderer
 const api = {
   getIdolInfo: (id) => ipcRenderer.invoke('getIdolInfo', id),
+  axiosError: (callback) => ipcRenderer.on('err:axios', callback),
 };
 
 ipcRenderer.on('version:asset:get', () => {

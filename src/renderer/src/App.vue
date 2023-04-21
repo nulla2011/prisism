@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div id="main">
     <RouterView v-slot="{ Component, route }">
       <template v-if="Component">
         <button v-show="$route.name !== 'home'" class="back" @click="$router.back()"></button>
@@ -8,22 +8,39 @@
             <component :is="Component" :key="route.path"></component>
           </template>
           <template #fallback>
-            <div v-loading.fullscreen.lock="true" element-loading-background="rgba(122, 122, 122, 0.8)"></div>
+            <div v-loading.fullscreen="true" element-loading-background="rgba(122, 122, 122, 0.8)" class="w-full h-full">
+            </div>
           </template>
         </Suspense>
       </template>
     </RouterView>
-  </main>
+    <Error v-if="store.error">{{ store.error }}</Error>
+  </div>
 </template>
 <script setup lang="ts">
+import Error from '@renderer/components/Error.vue';
+import useError from '@renderer/store/useError';
+const store = useError();
+window.api.axiosError((event, error) => {
+  store.error = error;
+})
 </script>
 <style lang="scss">
-main {
+#main {
   // min-width: 1280px;
   min-height: 720px;
-  background-image: url('@renderer/assets/image/background.jpg');
-  background-size: cover;
-  scrollbar-gutter: stable;
+  background-color: transparent;
+
+  &::before {
+    position: fixed;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    background-image: url('@renderer/assets/image/background.jpg');
+    background-size: cover;
+    scrollbar-gutter: stable;
+  }
 }
 
 .back {

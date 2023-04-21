@@ -3,11 +3,12 @@
     <div class="img-container w-full h-auto overflow-hidden">
       <el-image :src="data.imagesrc" class="image duration-200" />
     </div>
-    <div class="text text-center p-1 font-bold bg-white">{{ data.name }}</div>
+    <div class="text text-center p-1 font-bold bg-white" :style="style">{{ data.name }}</div>
   </el-card>
 </template>
 <script setup lang="ts">
-let props = defineProps<{ data: { name: string, roman: string, imagesrc: string } }>()
+let props = defineProps<{ data: { name: string, imagesrc: string, fontSize: number } }>()
+let style = { '--fontSize': props.data.fontSize + 'px' }
 </script>
 <style lang="scss" scoped>
 .img-container {
@@ -20,6 +21,6 @@ let props = defineProps<{ data: { name: string, roman: string, imagesrc: string 
 
 .text {
   font-family: HummingStd;
-  font-size: 24px;
+  font-size: var(--fontSize);
 }
 </style>

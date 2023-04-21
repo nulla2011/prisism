@@ -9,6 +9,6 @@ export default async (url: string) => {
     }
   }
   let resp = await axios(url);
-  writeCache(url, resp, global.dbVersion);
+  if (resp) writeCache(url, resp, global.dbVersion);
   return resp;
 };
