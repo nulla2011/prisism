@@ -14,15 +14,15 @@
         </Suspense>
       </template>
     </RouterView>
-    <Error v-if="store.error">{{ store.error }}</Error>
+    <Error v-if="store.error" @retry="$router.go(0)">{{ store.error }}</Error>
   </div>
 </template>
 <script setup lang="ts">
 import Error from '@renderer/components/Error.vue';
 import useError from '@renderer/store/useError';
 const store = useError();
-window.api.axiosError((event, error) => {
-  store.error = error;
+window.api.axiosError((event, errorText) => {
+  store.error = errorText;
 })
 </script>
 <style lang="scss">

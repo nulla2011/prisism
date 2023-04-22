@@ -2,15 +2,15 @@
   <div class="mask flex justify-center items-center">
     <div class="dialogue flex flex-col">
       <h1>错误</h1>
-      <div class="main text-center mt-10 flex-1">
+      <div class="main text-center mt-7 flex-1">
         <p class="err-occur">发生错误。</p>
         <br />
-        <p class="err-content">
+        <p class="err-content px-4">
           <slot></slot>
         </p>
       </div>
       <div class="pt-4 pb-8 flex justify-evenly">
-        <button>重试</button>
+        <button @click="$emit('retry')">重试</button>
         <button @click="back">返回</button>
       </div>
     </div>
@@ -81,6 +81,7 @@ const back = () => {
 
   .err-content {
     font-size: 18px;
+    white-space: pre-line;
   }
 
   button {

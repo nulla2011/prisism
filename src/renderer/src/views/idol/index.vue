@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header class="flex items-center">
-      <span class="name">{{ data.name }}</span>
+      <span class="name">{{ data?.name }}</span>
       <el-radio-group size="large" v-model="tab">
         <el-radio-button label="profile">资料</el-radio-button>
         <el-radio-button label="produce-idol">偶像</el-radio-button>
@@ -9,7 +9,7 @@
     </el-header>
     <el-main class="el-main">
       <div class="main-container">
-        <produce-card v-if="tab === 'produce-idol'" :list="data.produceIdols" />
+        <produce-card v-if="tab === 'produce-idol'" :list="data?.produceIdols" />
       </div>
     </el-main>
   </el-container>

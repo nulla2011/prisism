@@ -1,7 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" class="card">
     <div class="img-container w-full h-auto overflow-hidden">
-      <el-image :src="data.imagesrc" class="image duration-200" />
+      <el-image :src="data.imagesrc" class="image duration-200" loading="lazy" />
     </div>
     <div class="text text-center p-1 font-bold bg-white" :style="style">{{ data.name }}</div>
   </el-card>

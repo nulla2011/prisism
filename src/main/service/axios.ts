@@ -6,18 +6,24 @@ const API_BASE = import.meta.env['MAIN_VITE_API_TEST'];
 const service = Axios.create({
   baseURL: API_BASE,
 });
-const controller = new AbortController();
 export default async function request(url: string) {
   let resp: AxiosResponse;
   resp = await service
-    .get(url, { signal: controller.signal })
+    .get(url)
     .then((response) => response.data)
     .catch((error) => {
+      let text: string;
+      if (error.response) {
+        text = `${error.response?.status} ${error.response?.statusText}\n${error.response?.request?.path}`;
+      } else if (error.request) {
+        text = error.request?._currentUrl;
+      } else {
+        text = '';
+      }
       BrowserWindow.fromId(1)!.webContents.send(
         'err:axios',
-        `Error: ${error.message} ${error.request._currentUrl}` as string,
+        `Error: ${error.message}\n${text}` as string,
       );
-      controller.abort();
     });
   return resp;
 }
