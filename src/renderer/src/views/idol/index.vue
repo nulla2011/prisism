@@ -13,6 +13,7 @@
       </div>
     </el-main>
   </el-container>
+  <Error v-if="store.error">{{ store.error }}</Error>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -20,12 +21,16 @@ import { useRoute } from 'vue-router';
 import idols from '@renderer/shared/constants/idols';
 import ProduceCard from './ProduceCard.vue'
 // import test from '@renderer/test/test.json';
+import useError from '@renderer/store/useError';
+const store = useError();
 const route = useRoute();
 
 const id = idols.findIndex((item) => item.roman === (route.params.idolName as string)) + 1;
 let tab = ref('profile')
 // let data = test;
-let data = await window.api.getIdolInfo(id);
+let data = await window.api.getIdolInfo(id).catch((error) => {
+  store.error = error.message;
+});
 </script>
 <style lang="scss" scoped>
 .name {

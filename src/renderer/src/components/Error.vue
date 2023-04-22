@@ -4,13 +4,12 @@
       <h1>错误</h1>
       <div class="main text-center mt-7 flex-1">
         <p class="err-occur">发生错误。</p>
-        <br />
-        <p class="err-content px-4">
+        <p class="err-content px-4 mt-2">
           <slot></slot>
         </p>
       </div>
       <div class="pt-4 pb-8 flex justify-evenly">
-        <button @click="$emit('retry')">重试</button>
+        <button @click="$router.go(0)">重试</button>
         <button @click="back">返回</button>
       </div>
     </div>

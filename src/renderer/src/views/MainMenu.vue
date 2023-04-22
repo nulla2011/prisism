@@ -40,9 +40,10 @@
     <el-col :span="6"><button class="menu-button">
         <span data-text="资源预览">资源预览</span>
       </button></el-col>
-    <el-col :span="6"><button class="menu-button">
-        <span data-text="设置">设置</span>
-      </button></el-col>
+    <el-col :span="6">
+      <router-link to="/settings"><button class="menu-button">
+          <span data-text="设置">设置</span>
+        </button></router-link></el-col>
   </el-row>
 </template>
 <script setup lang="ts">

@@ -10,9 +10,12 @@ import 'element-plus/dist/index.css';
 import './styles/element-theme.scss';
 import '@icon-park/vue-next/styles/index.css';
 
+import Error from '@renderer/components/Error.vue';
+
 const app = createApp(App);
 const pinia = createPinia();
 app.use(router);
 app.use(pinia);
 app.use(ElementPlus);
+app.component('Error', Error);
 app.mount('#app');

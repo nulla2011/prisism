@@ -20,10 +20,7 @@ export default async function request(url: string) {
       } else {
         text = '';
       }
-      BrowserWindow.fromId(1)!.webContents.send(
-        'err:axios',
-        `Error: ${error.message}\n${text}` as string,
-      );
+      throw `Error: ${error.message}\n${text}`;
     });
   return resp;
 }
