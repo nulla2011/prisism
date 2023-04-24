@@ -6,7 +6,7 @@ import { ElMessage } from 'element-plus';
 const api = {
   getIdolInfo: (id) => ipcRenderer.invoke('getIdolInfo', id),
   clearCache: () => ipcRenderer.send('cache:clear'),
-  axiosError: (callback) => ipcRenderer.on('err:axios', callback),
+  // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
 };
 
 ipcRenderer.on('version:asset:get', () => {

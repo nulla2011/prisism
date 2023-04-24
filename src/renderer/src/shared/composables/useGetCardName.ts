@@ -1,3 +1,3 @@
 export default (name: string) => {
-  return name.match(/(?<=【)\S*(?=】)/)![0];
+  return name.match(/(?<=【).*(?=】)/)![0];
 };

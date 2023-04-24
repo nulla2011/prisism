@@ -5,11 +5,16 @@
       <el-radio-group size="large" v-model="tab">
         <el-radio-button label="profile">资料</el-radio-button>
         <el-radio-button label="produce-idol">偶像</el-radio-button>
+        <el-radio-button label="support-idol">偶像</el-radio-button>
+        <el-radio-button label="voice">语音</el-radio-button>
+        <el-radio-button label="costume">衣装</el-radio-button>
+        <el-radio-button label="commu">剧情</el-radio-button>
       </el-radio-group>
     </el-header>
     <el-main class="el-main">
       <div class="main-container">
         <produce-card v-if="tab === 'produce-idol'" :list="data?.produceIdols" />
+        <support-card v-if="tab === 'support-idol'" :list="data?.supportIdols" />
       </div>
     </el-main>
   </el-container>
@@ -20,6 +25,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import idols from '@renderer/shared/constants/idols';
 import ProduceCard from './ProduceCard.vue'
+import SupportCard from './SupportCard.vue'
 // import test from '@renderer/test/test.json';
 import useError from '@renderer/store/useError';
 const store = useError();

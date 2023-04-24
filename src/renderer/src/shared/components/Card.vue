@@ -12,11 +12,11 @@ let style = { '--fontSize': props.data.fontSize + 'px' }
 </script>
 <style lang="scss" scoped>
 .img-container {
-  aspect-ratio: 16/9;
+  aspect-ratio: 71/40;
 }
 
 .image:hover {
-  scale: 1.12;
+  transform: scale(1.12);
 }
 
 .text {
