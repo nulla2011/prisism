@@ -1,5 +1,5 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }" class="card">
+  <el-card :body-style="{ padding: '0px' }" class="card select-none">
     <div class="img-container w-full h-auto overflow-hidden">
       <el-image :src="data.imagesrc" class="image duration-200" loading="lazy" />
     </div>

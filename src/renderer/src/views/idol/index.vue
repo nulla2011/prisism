@@ -1,14 +1,18 @@
 <template>
   <el-container>
-    <el-header class="flex items-center">
-      <span class="name">{{ data?.name }}</span>
-      <el-radio-group size="large" v-model="tab">
-        <el-radio-button label="profile">资料</el-radio-button>
-        <el-radio-button label="produce-idol">偶像</el-radio-button>
-        <el-radio-button label="support-idol">偶像</el-radio-button>
-        <el-radio-button label="voice">语音</el-radio-button>
-        <el-radio-button label="costume">衣装</el-radio-button>
-        <el-radio-button label="commu">剧情</el-radio-button>
+    <el-header class="flex items-center justify-between">
+      <span class="name select-none">{{ data?.name }}</span>
+      <el-radio-group size="small" v-model="tab">
+        <el-radio-button label="profile" class="button"><span class="tab-name">资料</span></el-radio-button>
+        <el-radio-button label="produce-idol" class="button">
+          <span class="icon icon-p"></span><span class="tab-name tab-idol">偶像</span>
+        </el-radio-button>
+        <el-radio-button label="support-idol" class="button">
+          <span class="icon icon-s"></span><span class="tab-name tab-idol">偶像</span>
+        </el-radio-button>
+        <el-radio-button label="voice" class="button"><span class="tab-name">语音</span></el-radio-button>
+        <el-radio-button label="costume" class="button"><span class="tab-name">衣装</span></el-radio-button>
+        <el-radio-button label="commu" class="button"><span class="tab-name">剧情</span></el-radio-button>
       </el-radio-group>
     </el-header>
     <el-main class="el-main">
@@ -43,7 +47,11 @@ let data = await window.api.getIdolInfo(id).catch((error) => {
   font-family: HummingStd;
   font-size: 24px;
   color: var(--el-text-color-primary);
-  // font-weight: bold;
+  background-image: url(@renderer/assets/image/common_header_base_l.png);
+  height: 56px;
+  width: 371px;
+  line-height: 56px;
+  padding-left: 50px;
 }
 
 @import '@renderer/styles/global.scss';
@@ -55,7 +63,44 @@ let data = await window.api.getIdolInfo(id).catch((error) => {
   border-radius: 8px;
   border-width: 2px;
   background-color: #FFF5;
-  overflow-y: scroll;
+  overflow-y: auto;
   @include scrollbar;
+}
+
+.button {
+  @apply outline-none;
+}
+
+$height: 33px;
+
+.tab-name {
+  font-family: yuanti;
+  font-size: 20px;
+  line-height: $height;
+  height: $height;
+  text-align: center;
+  vertical-align: top;
+  min-width: 100px;
+  display: inline-block;
+}
+
+.tab-idol {
+  min-width: 62px;
+}
+
+.icon {
+  width: 33px;
+  height: 33px;
+  background-size: contain;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.icon-p {
+  background-image: url(@renderer/assets/image/icon_idol_type_produce.png);
+}
+
+.icon-s {
+  background-image: url(@renderer/assets/image/icon_idol_type_support.png);
 }
 </style>

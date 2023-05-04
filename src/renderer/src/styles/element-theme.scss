@@ -1,12 +1,18 @@
-@forward "element-plus/theme-chalk/src/common/var.scss" with ($colors: (
-        "primary": ("base": #ff48b4),
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+    $colors: (
+        "primary": (
+            "base": #ff48b4,
+        ),
         // "primary": ("base": #e9589d),
         // "success": ("base": #16BA3A),
         // "warning": ("base": #FF771C),
         // "danger": ("base": #ff3030),
         // "error": ("base": #ff3030),
-        // "info": ("base": #909399),
+        // "info": ("base": #909399),,
     ),
-    $text-color:( 'primary':#615365)
+    $text-color: (
+        "primary": #615365,
+        "regular": #615466,
+    )
 );
 @use "element-plus/theme-chalk/src/index.scss" as *;
