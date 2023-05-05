@@ -10,15 +10,19 @@
         <el-radio-button label="support-idol" class="button">
           <span class="icon icon-s"></span><span class="tab-name tab-idol">偶像</span>
         </el-radio-button>
-        <el-radio-button label="voice" class="button"><span class="tab-name">语音</span></el-radio-button>
+        <el-radio-button label="voices" class="button"><span class="tab-name">语音</span></el-radio-button>
         <el-radio-button label="costume" class="button"><span class="tab-name">衣装</span></el-radio-button>
         <el-radio-button label="commu" class="button"><span class="tab-name">剧情</span></el-radio-button>
       </el-radio-group>
     </el-header>
     <el-main class="el-main">
       <div class="main-container">
-        <produce-card v-if="tab === 'produce-idol'" :list="data?.produceIdols" />
-        <support-card v-if="tab === 'support-idol'" :list="data?.supportIdols" />
+        <template v-if="!store.error">
+          <produce-card v-if="tab === 'produce-idol'" :list="data.produceIdols" />
+          <support-card v-if="tab === 'support-idol'" :list="data.supportIdols" />
+          <profile v-if="tab === 'profile'" :data="data" />
+          <voices v-if="tab === 'voices'" />
+        </template>
       </div>
     </el-main>
   </el-container>
@@ -28,8 +32,10 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import idols from '@renderer/shared/constants/idols';
-import ProduceCard from './ProduceCard.vue'
-import SupportCard from './SupportCard.vue'
+import ProduceCard from './ProduceCard.vue';
+import SupportCard from './SupportCard.vue';
+import Profile from './Profile.vue';
+import Voices from './Voices.vue';
 // import test from '@renderer/test/test.json';
 import useError from '@renderer/store/useError';
 const store = useError();
@@ -38,7 +44,7 @@ const route = useRoute();
 const id = idols.findIndex((item) => item.roman === (route.params.idolName as string)) + 1;
 let tab = ref('profile')
 // let data = test;
-let data = await window.api.getIdolInfo(id).catch((error) => {
+let data: idol = await window.api.getIdolInfo(id).catch((error) => {
   store.error = error.message;
 });
 </script>
@@ -57,6 +63,7 @@ let data = await window.api.getIdolInfo(id).catch((error) => {
 @import '@renderer/styles/global.scss';
 
 .main-container {
+  position: relative;
   height: calc(100vh - 100px);
   border-style: solid;
   border-color: #9b949f;
@@ -85,7 +92,7 @@ $height: 33px;
 }
 
 .tab-idol {
-  min-width: 62px;
+  min-width: 100px - $height - 5px;
 }
 
 .icon {
