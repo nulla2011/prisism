@@ -10,3 +10,4 @@ build
 electron*.mjs
 resources
 src/renderer/test
+.env
