@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header class="flex items-center justify-between">
+    <el-header class="header flex items-center justify-between">
       <span class="name select-none">{{ data?.name }}</span>
       <el-radio-group size="small" v-model="tab">
         <el-radio-button label="profile" class="button"><span class="tab-name">资料</span></el-radio-button>
@@ -21,7 +21,7 @@
           <produce-card v-if="tab === 'produce-idol'" :list="data.produceIdols" />
           <support-card v-if="tab === 'support-idol'" :list="data.supportIdols" />
           <profile v-if="tab === 'profile'" :data="data" />
-          <voices v-if="tab === 'voices'" />
+          <voices v-if="tab === 'voices'" :list="data.voices" />
         </template>
       </div>
     </el-main>
@@ -29,7 +29,7 @@
   <Error v-if="store.error">{{ store.error }}</Error>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import idols from '@renderer/shared/constants/idols';
 import ProduceCard from './ProduceCard.vue';
@@ -42,13 +42,20 @@ const store = useError();
 const route = useRoute();
 
 const id = idols.findIndex((item) => item.roman === (route.params.idolName as string)) + 1;
+onMounted(() => document.body.style.overflow = 'hidden');
+onUnmounted(() => document.body.style.overflow = '');
 let tab = ref('profile')
 // let data = test;
 let data: idol = await window.api.getIdolInfo(id).catch((error) => {
   store.error = error.message;
 });
 </script>
+
 <style lang="scss" scoped>
+.header {
+  padding-left: 0;
+}
+
 .name {
   font-family: HummingStd;
   font-size: 24px;

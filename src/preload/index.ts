@@ -7,6 +7,7 @@ const api = {
   getIdolInfo: (id) => ipcRenderer.invoke('getIdolInfo', id),
   clearCache: () => ipcRenderer.send('cache:clear'),
   // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
+  getAsset: (path) => ipcRenderer.invoke('getAsset', path),
 };
 
 ipcRenderer.on('version:asset:get', () => {

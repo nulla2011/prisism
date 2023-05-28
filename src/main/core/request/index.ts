@@ -1,4 +1,4 @@
-import axios from '../service/axios';
+import axios from '../../service/axios';
 import { cacheExist, readCache, writeCache } from './cacheRequest';
 
 export default async (url: string) => {

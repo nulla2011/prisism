@@ -1,7 +1,7 @@
 import Axios, { AxiosResponse } from 'axios';
 import { BrowserWindow } from 'electron';
 
-const API_BASE = import.meta.env['MAIN_VITE_API_TEST'];
+const API_BASE = import.meta.env['MAIN_VITE_API'];
 
 const service = Axios.create({
   baseURL: API_BASE,
