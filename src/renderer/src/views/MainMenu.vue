@@ -1,10 +1,11 @@
 <template>
-  <el-row justify="space-evenly" class="top-36 h-20 mx-24">
-    <el-col :span="6">
-      <router-link to="/all-idol">
-        <button class="menu-button">
-          <span data-text="偶像">偶像</span>
-          <el-dropdown class="icon justify-self-end" size="large">
+  <div class="py-32 px-32">
+    <a-row justify="space-around" class="mb-16">
+      <a-col :span="8" class="col">
+        <router-link to="/all-idol">
+          <button class="menu-button">
+            <span data-text="偶像">偶像</span>
+            <!-- <el-dropdown class="icon justify-self-end" size="large">
             <down theme="outline" size="42" fill="#514a80" />
             <template #dropdown>
               <el-dropdown-menu>
@@ -13,38 +14,39 @@
                 </a>
               </el-dropdown-menu>
             </template>
-          </el-dropdown>
-        </button></router-link>
-    </el-col>
-    <el-col :span="6"><button class="menu-button">
-        <span data-text="音乐">音乐</span>
-      </button></el-col>
-    <el-col :span="6"><button class="menu-button">
-        <span data-text="背景">背景</span>
-      </button></el-col>
-  </el-row>
-  <el-row justify="space-evenly" class="top-56 h-20 mx-24">
-    <el-col :span="6"><button class="menu-button">
-        <span data-text="衣装">衣装</span>
-      </button></el-col>
-    <el-col :span="6">
-      <router-link to="/commu"><button class="menu-button">
-          <span data-text="剧情">剧情</span>
-        </button>
-      </router-link></el-col>
-    <el-col :span="6"><button class="menu-button">
-        <span data-text="四格漫画">四格漫画</span>
-      </button></el-col>
-  </el-row>
-  <el-row justify="space-evenly" class="top-80 h-20 mx-24">
-    <el-col :span="6"><button class="menu-button">
-        <span data-text="资源预览">资源预览</span>
-      </button></el-col>
-    <el-col :span="6">
-      <router-link to="/settings"><button class="menu-button">
-          <span data-text="设置">设置</span>
-        </button></router-link></el-col>
-  </el-row>
+          </el-dropdown> -->
+          </button></router-link>
+      </a-col>
+      <a-col :span="8" class="col"><button class="menu-button">
+          <span data-text="音乐">音乐</span>
+        </button></a-col>
+      <a-col :span="8" class="col"><button class="menu-button">
+          <span data-text="背景">背景</span>
+        </button></a-col>
+    </a-row>
+    <a-row justify="space-around" class="mb-16">
+      <a-col :span="8" class="col"><button class="menu-button">
+          <span data-text="衣装">衣装</span>
+        </button></a-col>
+      <a-col :span="8" class="col">
+        <router-link to="/commu"><button class="menu-button">
+            <span data-text="剧情">剧情</span>
+          </button>
+        </router-link></a-col>
+      <a-col :span="8" class="col"><button class="menu-button">
+          <span data-text="四格漫画">四格漫画</span>
+        </button></a-col>
+    </a-row>
+    <a-row justify="space-around">
+      <a-col :span="8" class="col"><button class="menu-button">
+          <span data-text="资源预览">资源预览</span>
+        </button></a-col>
+      <a-col :span="8" class="col">
+        <router-link to="/settings"><button class="menu-button">
+            <span data-text="设置">设置</span>
+          </button></router-link></a-col>
+    </a-row>
+  </div>
 </template>
 <script setup lang="ts">
 import { Down } from '@icon-park/vue-next';
@@ -61,6 +63,11 @@ const toGroup = (group: string) => {
 }
 </script>
 <style lang="scss" scoped>
+.col {
+  display: flex;
+  justify-content: center;
+}
+
 .menu-button {
   $height: 92px;
   $width: 261px;

@@ -1,3 +1,3 @@
 <template>
-  <el-empty description="开发中，，，" image-size="400"></el-empty>
+  <a-empty description="开发中，，，" :image-style="{ height: '250px' }" class="mt-40"></a-empty>
 </template>

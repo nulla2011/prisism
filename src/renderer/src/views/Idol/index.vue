@@ -1,21 +1,21 @@
 <template>
-  <el-container>
-    <el-header class="header flex items-center justify-between">
+  <a-layout class="bg-transparent">
+    <a-layout-header class="flex items-center justify-between my-2 pl-0 pr-5 bg-transparent">
       <span class="name select-none">{{ data?.name }}</span>
-      <el-radio-group size="small" v-model="tab">
-        <el-radio-button label="profile" class="button"><span class="tab-name">资料</span></el-radio-button>
-        <el-radio-button label="produce-idol" class="button">
+      <a-radio-group size="large" v-model:value="tab" button-style="solid">
+        <a-radio-button value="profile" class="button"><span class="tab-name">资料</span></a-radio-button>
+        <a-radio-button value="produce-idol" class="button">
           <span class="icon icon-p"></span><span class="tab-name tab-idol">偶像</span>
-        </el-radio-button>
-        <el-radio-button label="support-idol" class="button">
+        </a-radio-button>
+        <a-radio-button value="support-idol" class="button">
           <span class="icon icon-s"></span><span class="tab-name tab-idol">偶像</span>
-        </el-radio-button>
-        <el-radio-button label="voices" class="button"><span class="tab-name">语音</span></el-radio-button>
-        <el-radio-button label="costume" class="button"><span class="tab-name">衣装</span></el-radio-button>
-        <el-radio-button label="commu" class="button"><span class="tab-name">剧情</span></el-radio-button>
-      </el-radio-group>
-    </el-header>
-    <el-main class="el-main">
+        </a-radio-button>
+        <a-radio-button value="voices" class="button"><span class="tab-name">语音</span></a-radio-button>
+        <a-radio-button value="costume" class="button"><span class="tab-name">衣装</span></a-radio-button>
+        <a-radio-button value="commu" class="button"><span class="tab-name">剧情</span></a-radio-button>
+      </a-radio-group>
+    </a-layout-header>
+    <a-layout-content class="mx-5">
       <div class="main-container">
         <template v-if="!store.error">
           <produce-card v-if="tab === 'produce-idol'" :list="data.produceIdols" />
@@ -24,8 +24,8 @@
           <voices v-if="tab === 'voices'" :list="data.voices" />
         </template>
       </div>
-    </el-main>
-  </el-container>
+    </a-layout-content>
+  </a-layout>
   <Error v-if="store.error">{{ store.error }}</Error>
 </template>
 <script setup lang="ts">
@@ -41,10 +41,13 @@ import useError from '@renderer/store/useError';
 const store = useError();
 const route = useRoute();
 
+// const headerStyle: CSSProperties = {
+
+// };
 const id = idols.findIndex((item) => item.roman === (route.params.idolName as string)) + 1;
-onMounted(() => document.body.style.overflow = 'hidden');
-onUnmounted(() => document.body.style.overflow = '');
-let tab = ref('profile')
+// onMounted(() => document.body.style.overflow = 'hidden');
+// onUnmounted(() => document.body.style.overflow = '');
+let tab = ref<string>('profile')
 // let data = test;
 let data: idol = await window.api.getIdolInfo(id).catch((error) => {
   store.error = error.message;
@@ -52,14 +55,9 @@ let data: idol = await window.api.getIdolInfo(id).catch((error) => {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  padding-left: 0;
-}
-
 .name {
   font-family: HummingStd;
   font-size: 24px;
-  color: var(--el-text-color-primary);
   background-image: url(@renderer/assets/image/common_header_base_l.png);
   height: 56px;
   width: 371px;
@@ -93,7 +91,6 @@ $height: 33px;
   line-height: $height;
   height: $height;
   text-align: center;
-  vertical-align: top;
   min-width: 100px;
   display: inline-block;
 }
@@ -103,11 +100,14 @@ $height: 33px;
 }
 
 .icon {
-  width: 33px;
-  height: 33px;
+  vertical-align: top;
+  width: 30px;
+  height: 30px;
   background-size: contain;
   display: inline-block;
   margin-right: 5px;
+  position: relative;
+  top: 3px;
 }
 
 .icon-p {

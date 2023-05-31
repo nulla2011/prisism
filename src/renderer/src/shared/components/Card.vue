@@ -1,10 +1,10 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }" class="card select-none">
+  <a-card :bodyStyle="{ padding: '0px' }" hoverable class="card select-none">
     <div class="img-container w-full h-auto overflow-hidden">
-      <el-image :src="data.imagesrc" class="image duration-200" loading="lazy" />
+      <img :src="data.imagesrc" class="image duration-200" loading="lazy" />
     </div>
     <div class="text text-center p-1 font-bold bg-white" :style="style">{{ data.name }}</div>
-  </el-card>
+  </a-card>
 </template>
 <script setup lang="ts">
 let props = defineProps<{ data: { name: string, imagesrc: string, fontSize: number } }>()

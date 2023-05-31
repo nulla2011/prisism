@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import { electronAPI } from '@electron-toolkit/preload';
-import { ElMessage } from 'element-plus';
+import { message } from 'ant-design-vue';
 
 // Custom APIs for renderer
 const api = {
@@ -11,31 +11,23 @@ const api = {
 };
 
 ipcRenderer.on('version:asset:get', () => {
-  ElMessage({ message: 'Getting asset version...', duration: 5000 });
+  message.loading({ content: 'Getting asset version...', key: 'version:asset' });
 });
 ipcRenderer.on('version:db:get', () => {
-  ElMessage({ message: 'Getting DB version...', duration: 5000 });
+  message.loading({ content: 'Getting DB version...', key: 'version:db' });
 });
 ipcRenderer.on('version:asset', (event, { assetVersion, isNew }) => {
   if (isNew) {
-    ElMessage({
-      message: `New asset version: ${assetVersion}`,
-      type: 'success',
-      duration: 10000,
-    });
+    message.success({ content: `New asset version: ${assetVersion}`, key: 'version:asset' });
   } else {
-    ElMessage({ message: `Asset version: ${assetVersion}`, duration: 5000 });
+    message.info({ content: `Asset version: ${assetVersion}`, key: 'version:asset' });
   }
 });
 ipcRenderer.on('version:db', (event, { dbVersion, isNew }) => {
   if (isNew) {
-    ElMessage({
-      message: `New DB version: ${dbVersion}`,
-      type: 'success',
-      duration: 10000,
-    });
+    message.success({ content: `New DB version: ${dbVersion}`, key: 'version:db' });
   } else {
-    ElMessage({ message: `DB version: ${dbVersion}`, duration: 5000 });
+    message.info({ content: `DB version: ${dbVersion}`, key: 'version:db' });
   }
 });
 

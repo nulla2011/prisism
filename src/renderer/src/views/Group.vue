@@ -2,14 +2,14 @@
   <div v-if="groupName" class="h-32 flex justify-center pt-4"><img
       :src="useGetUrlHash(unitLogoPath, idolList[0].unitId.padStart(3, '0'), 'png')" alt="unit logo" class="unit-logo ">
   </div>
-  <el-row class="top-8 justify-center" type="flex">
-    <el-col v-for="idol in idolList" :span="5" class="idol-link">
+  <a-row class="pt-8 px-20 justify-center w-full" :gutter="24">
+    <a-col v-for="idol in idolList" :span="6" class="idol-link">
       <router-link :to="{ name: 'idol', params: { idolName: idol.roman } }">
         <idol-card
           :data="{ name: idol.name, imagesrc: 'https://idollist.idolmaster-official.jp/images/character_main/' + reverseName(idol.roman) + '_02.jpg', fontSize: 24 }"></idol-card>
       </router-link>
-    </el-col>
-  </el-row>
+    </a-col>
+  </a-row>
 </template>
 <script setup lang="ts">
 import IdolCard from "@renderer/shared/components/Card.vue";
@@ -37,6 +37,6 @@ const reverseName = (name: string) => {
 </script>
 <style lang="scss" scoped>
 .idol-link {
-  margin: 2rem 10px;
+  margin-block: 2rem;
 }
 </style>

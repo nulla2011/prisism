@@ -1,20 +1,27 @@
 <template>
-  <div id="main">
-    <RouterView v-slot="{ Component, route }">
-      <template v-if="Component">
-        <button v-show="$route.name !== 'home'" class="back" @click="$router.back()"></button>
-        <Suspense timeout="0">
-          <template #default>
-            <component :is="Component" :key="route.path"></component>
-          </template>
-          <template #fallback>
-            <div v-loading.fullscreen="true" element-loading-background="rgba(122, 122, 122, 0.8)" class="w-full h-full">
-            </div>
-          </template>
-        </Suspense>
-      </template>
-    </RouterView>
-  </div>
+  <a-config-provider :theme="{
+    token: {
+      colorPrimary: '#ff48b4',
+      colorTextBase: '#615365'
+    },
+  }">
+    <div id="main">
+      <RouterView v-slot="{ Component, route }">
+        <template v-if="Component">
+          <button v-show="$route.name !== 'home'" class="back" @click="$router.back()"></button>
+          <Suspense timeout="0">
+            <template #default>
+              <component :is="Component" :key="route.path"></component>
+            </template>
+            <template #fallback>
+              <!-- <div v-loading.fullscreen="true" element-loading-background="rgba(122, 122, 122, 0.8)" class="w-full h-full">
+            </div> -->
+            </template>
+          </Suspense>
+        </template>
+      </RouterView>
+    </div>
+  </a-config-provider>
 </template>
 <script setup lang="ts">
 
@@ -47,7 +54,7 @@
   z-index: 5;
 
   &:active {
-    transform: scale(1.1);
+    transform: var(--scale-effect);
   }
 }
 </style>

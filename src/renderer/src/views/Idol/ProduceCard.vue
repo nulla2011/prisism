@@ -1,20 +1,20 @@
 <template>
-  <el-row class="justify-center" type="flex">
+  <a-row class="justify-center px-16 py-4" :gutter="24">
     <template v-for="card in list">
-      <el-col :span="5" class="card-link">
+      <a-col :span="6" class="card-link">
         <router-link :to="{ name: 'card', params: { id: card.id } }">
           <card-card
             :data="{ name: useGetCardName(card.name), imagesrc: useGetUrlHash(produceIdolCardPath, card.id, 'jpg', card.hash), fontSize: 18 }"></card-card>
         </router-link>
-      </el-col>
-      <el-col :span="5" class="card-link">
+      </a-col>
+      <a-col :span="6" class="card-link">
         <router-link :to="{ name: 'card', params: { id: card.id } }">
           <card-card
             :data="{ name: useGetCardName(card.name), imagesrc: useGetUrlHash(produceIdolFesCardPath, card.id, 'jpg', card.hash), fontSize: 18 }"></card-card>
         </router-link>
-      </el-col>
+      </a-col>
     </template>
-  </el-row>
+  </a-row>
 </template>
 <script setup lang="ts">
 import CardCard from '@renderer/shared/components/Card.vue'
@@ -25,6 +25,6 @@ const props = defineProps<{ list: Record<string, any>[] }>()
 </script>
 <style type="scss" scoped>
 .card-link {
-  margin: 2rem 10px;
+  margin-block: 2rem;
 }
 </style>
