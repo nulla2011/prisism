@@ -2,7 +2,7 @@
   <a-config-provider :theme="{
     token: {
       colorPrimary: '#ff48b4',
-      colorTextBase: '#615365'
+      colorTextBase: 'rgb(83,67,87)'  // #615365 * 0.88
     },
   }">
     <div id="main">
@@ -14,8 +14,8 @@
               <component :is="Component" :key="route.path"></component>
             </template>
             <template #fallback>
-              <!-- <div v-loading.fullscreen="true" element-loading-background="rgba(122, 122, 122, 0.8)" class="w-full h-full">
-            </div> -->
+              <a-spin size="large"
+                class="fixed top-0 left-0 bottom-0 right-0 z-50 flex flex-col justify-center items-center bg-[#ffffff90]" />
             </template>
           </Suspense>
         </template>

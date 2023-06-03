@@ -1,22 +1,20 @@
 <template>
   <div class="header flex flex-row-reverse py-3">
-    <el-button class="mr-6" type="primary" plain><span class="folder-button">打开目录</span></el-button>
+    <a-button class="mr-6" type="primary"><span class="folder-button">打开目录</span></a-button>
   </div>
-  <hr class="mx-4">
+  <hr class="mx-4" />
   <div class="voices grid grid-cols-2 gap-y-2 mt-4 mb-[4.5rem]">
     <audio :src="audiosrc" autoplay class="voice-audio"></audio>
     <div v-for="voice in list" :key="voiceKey(voice)" class="voice-warp flex items-center rounded-lg mx-3 h-12">
-      <el-button :loading="isLoading[voiceKey(voice)]" circle class="mx-3" @click.stop.prevent="play(voice)">
+      <a-button shape="circle" :loading="isLoading[voiceKey(voice)]" class="mx-3" @click.stop.prevent="play(voice)">
         <template #icon>
-          <el-icon size="25">
-            <play-one theme="outline" size="40" fill="currentcolor" />
-          </el-icon>
+          <play-one theme="outline" size="22" fill="currentcolor" />
         </template>
-      </el-button>
-      <span class="title">{{ voice.title }}</span>
-      <el-tooltip effect="light" :content="voice.voice" placement="bottom">
-        <info theme="outline" size="25" class="info-icon ml-auto mr-3" />
-      </el-tooltip>
+      </a-button>
+      <span class="title" :style="{ color: token.colorText }">{{ voice.title }}</span>
+      <a-tooltip :title="voice.voice" placement="bottom" :getPopupContainer="(triggerNode) => triggerNode.parentNode">
+        <info theme="outline" size="25" class="ml-auto mr-3" :style="{ color: token.colorTextSecondary }" />
+      </a-tooltip>
     </div>
   </div>
 </template>
@@ -25,6 +23,9 @@ import { reactive, ref } from 'vue';
 import { PlayOne, Info } from '@icon-park/vue-next';
 import { voiceCharacter } from '@renderer/shared/constants/paths'
 import useError from '@renderer/store/useError';
+import { theme } from 'ant-design-vue';
+const { useToken } = theme;
+const { token } = useToken();
 const store = useError();
 
 const props = defineProps<{ list: Record<string, any>[] }>();
@@ -40,7 +41,6 @@ let audiosrc = ref('');
 const charId = props.list[0].voiceId.substring(3, 6);
 const play = (voice: Record<string, any>) => {
   const key = voiceKey(voice);
-  console.log(key);
   isLoading[key] = true;
   if (voice.voice) {
     window.api.getAsset(voiceCharacter + charId + '/' + key + '.m4a').then((file) => {
@@ -85,15 +85,11 @@ const play = (voice: Record<string, any>) => {
 <style lang="scss" scoped>
 .folder-button {
   font-family: yuanti;
-  font-size: 18px;
-}
-
-.voices {
-  overflow-y: auto;
+  font-size: 15px;
 }
 
 hr {
-  border-color: #9b949f;
+  border-top: 2px solid #9b949f;
 }
 
 .voice-warp {
@@ -101,11 +97,8 @@ hr {
 
   .title {
     font-family: HummingStd;
-    color: var(--el-text-color-primary);
+    font-size: 18px;
   }
 
-  .info-icon {
-    color: var(--el-text-color-primary);
-  }
 }
 </style>

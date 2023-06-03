@@ -1,6 +1,6 @@
 <template>
   <a-layout class="bg-transparent">
-    <a-layout-header class="flex items-center justify-between my-2 pl-0 pr-5 bg-transparent">
+    <a-layout-header class="flex items-center justify-between pl-0 pr-5 bg-transparent">
       <span class="name select-none">{{ data?.name }}</span>
       <a-radio-group size="large" v-model:value="tab" button-style="solid">
         <a-radio-button value="profile" class="button"><span class="tab-name">资料</span></a-radio-button>
@@ -15,7 +15,7 @@
         <a-radio-button value="commu" class="button"><span class="tab-name">剧情</span></a-radio-button>
       </a-radio-group>
     </a-layout-header>
-    <a-layout-content class="mx-5">
+    <a-layout-content class="p-[20px]">
       <div class="main-container">
         <template v-if="!store.error">
           <produce-card v-if="tab === 'produce-idol'" :list="data.produceIdols" />
@@ -69,7 +69,7 @@ let data: idol = await window.api.getIdolInfo(id).catch((error) => {
 
 .main-container {
   position: relative;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 104px);
   border-style: solid;
   border-color: #9b949f;
   border-radius: 8px;

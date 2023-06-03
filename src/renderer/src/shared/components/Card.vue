@@ -15,6 +15,10 @@ let style = { '--fontSize': props.data.fontSize + 'px' }
   aspect-ratio: 71/40;
 }
 
+.image {
+  background-color: #f5f5f5;
+}
+
 .image:hover {
   transform: scale(1.12);
 }
