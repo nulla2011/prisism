@@ -50,7 +50,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Down } from '@icon-park/vue-next';
+// import { Down } from '@icon-park/vue-next';
 import { useRouter } from 'vue-router'
 import groups from '@renderer/shared/constants/group'
 const router = useRouter()

@@ -2,14 +2,12 @@ import { app } from 'electron';
 import { existsSync, mkdirSync, readFileSync, writeFile } from 'fs';
 import path from 'path';
 
-const CACHE_PATH = 'request_cache';
+const CACHE_PATH = 'Api_Cache';
 const url2path = (url: string) => {
-  return path.join(
-    app.getPath('userData'),
-    CACHE_PATH,
-    url.split('?')[0],
-    url.split('=')[1] + '.json',
-  );
+  let filePath =
+    (url.includes('?') ? path.join(url.split('?')[0], url.split('=')[1]) : url.split('.')[0]) +
+    '.json';
+  return path.join(app.getPath('userData'), CACHE_PATH, filePath);
 };
 export function cacheExist(url: string) {
   return existsSync(url2path(url));

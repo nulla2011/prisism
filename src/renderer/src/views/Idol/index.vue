@@ -41,9 +41,6 @@ import useError from '@renderer/store/useError';
 const store = useError();
 const route = useRoute();
 
-// const headerStyle: CSSProperties = {
-
-// };
 const id = idols.findIndex((item) => item.roman === (route.params.idolName as string)) + 1;
 // onMounted(() => document.body.style.overflow = 'hidden');
 // onUnmounted(() => document.body.style.overflow = '');

@@ -3,8 +3,19 @@ import request from './core/request';
 import getAsset from './core/getAsset';
 
 export default () => {
-  ipcMain.handle('getIdolInfo', async (event, id) => {
-    let resp = await request(`character?id=${id}`).catch((e) => {
+  ipcMain.handle('queryApi', async (event, type, queryValue) => {
+    let url;
+    switch (type) {
+      case 'character':
+        url = `character?id=${queryValue}`;
+        break;
+      case 'concertBgms':
+        url = 'concertBgms.json';
+        break;
+      default:
+        break;
+    }
+    let resp = await request(url).catch((e) => {
       throw e;
     });
     return resp;

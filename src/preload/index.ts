@@ -4,7 +4,8 @@ import { message } from 'ant-design-vue';
 
 // Custom APIs for renderer
 const api = {
-  getIdolInfo: (id) => ipcRenderer.invoke('getIdolInfo', id),
+  getIdolInfo: (id) => ipcRenderer.invoke('queryApi', 'character', id),
+  getConcertBgms: () => ipcRenderer.invoke('queryApi', 'concertBgms'),
   clearCache: () => ipcRenderer.send('cache:clear'),
   // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
   getAsset: (path) => ipcRenderer.invoke('getAsset', path),
