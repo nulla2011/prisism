@@ -23,10 +23,10 @@ import { reactive, ref } from 'vue';
 import { PlayOne, Info } from '@icon-park/vue-next';
 import { voiceCharacter } from '@renderer/shared/constants/paths'
 import useError from '@renderer/store/useError';
+const store = useError();
 import { theme } from 'ant-design-vue';
 const { useToken } = theme;
 const { token } = useToken();
-const store = useError();
 
 const props = defineProps<{ list: Record<string, any>[] }>();
 const voiceKey = (voice: Record<string, string>) => {

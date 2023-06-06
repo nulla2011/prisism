@@ -2,7 +2,7 @@
   <a-config-provider :theme="{
     token: {
       colorPrimary: '#ff48b4',
-      colorTextBase: 'rgb(83,67,87)'  // #615365 * 0.88
+      colorTextBase: 'rgb(85,73,89)'  // #615365 * 0.88
     },
   }">
     <div id="main">
