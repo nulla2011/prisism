@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { PlayOne, Info } from '@icon-park/vue-next';
-import { voiceCharacter } from '@renderer/shared/constants/paths'
+import { voiceCharacterPath } from '@renderer/shared/constants/paths'
 import useError from '@renderer/store/useError';
 const store = useError();
 import { theme } from 'ant-design-vue';
@@ -43,7 +43,7 @@ const play = (voice: Record<string, any>) => {
   const key = voiceKey(voice);
   isLoading[key] = true;
   if (voice.voice) {
-    window.api.getAsset(voiceCharacter + charId + '/' + key + '.m4a').then((file) => {
+    window.api.getAsset(voiceCharacterPath + charId + '/' + key + '.m4a').then((file) => {
       isLoading[key] = false;
       const blob = new Blob([file], { type: 'video/mp4' });
       audiosrc.value = URL.createObjectURL(blob);
@@ -57,8 +57,8 @@ const play = (voice: Record<string, any>) => {
     const char2 = voice.voiceId.substring(4, 7);
     let url1 = '';
     let url2 = '';
-    let path1 = voiceCharacter + char1 + `/mypage_talking_duo_${char1}${char2}0010010.m4a`;
-    let path2 = voiceCharacter + char2 + `/mypage_talking_duo_${char1}${char2}0010020.m4a`;
+    let path1 = voiceCharacterPath + char1 + `/mypage_talking_duo_${char1}${char2}0010010.m4a`;
+    let path2 = voiceCharacterPath + char2 + `/mypage_talking_duo_${char1}${char2}0010020.m4a`;
     Promise.all([
       window.api.getAsset(path1).then((file) => {
         const blob = new Blob([file], { type: 'video/mp4' });

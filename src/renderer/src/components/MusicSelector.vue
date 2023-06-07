@@ -12,6 +12,7 @@
 import { ref } from 'vue';
 import useGetUrlHash from '@renderer/shared/composables/useGetUrlHash';
 import MusicCard from '@renderer/components/MusicCard.vue';
+import { unitIconPath, musicIconPath } from '@renderer/shared/constants/paths';
 import { theme } from 'ant-design-vue';
 const { useToken } = theme;
 const { token } = useToken();
@@ -29,11 +30,11 @@ const getBorderImg = (song: Record<string, string>) => {
 }
 const getIcon = (song: Record<string, string>) => {
   if (song.iconImage) {
-    return useGetUrlHash('images/content/music/icon/', song.iconImage, 'png');
+    return useGetUrlHash(musicIconPath, song.iconImage, 'png');
   } else if (song.unitId === '0') {
-    return useGetUrlHash('images/content/music/icon/', 'unit_icon_0', 'png');
+    return useGetUrlHash(musicIconPath, 'unit_icon_0', 'png');
   } else {
-    return useGetUrlHash('images/content/unit/icon/', song.unitId.padStart(3, '0'), 'png');
+    return useGetUrlHash(unitIconPath, song.unitId.padStart(3, '0'), 'png');
   }
 }
 const changeSong = (index: number) => {

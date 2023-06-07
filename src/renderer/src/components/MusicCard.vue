@@ -10,14 +10,22 @@
         <div class="artist" :style="{ color: token.colorText }">{{ song.artist }}</div>
         <p class="description" :style="{ color: token.colorText }">{{ song.description }}</p>
       </div>
+      <a-button size="large" shape="circle" type="primary" :loading="isLoading" class="mx-3" @click.stop.prevent="">
+        <template #icon>
+          <play-one theme="outline" size="25" fill="currentcolor" />
+        </template>
+      </a-button>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
 import { theme } from 'ant-design-vue';
+import { PlayOne } from '@icon-park/vue-next';
 const { useToken } = theme;
 const { token } = useToken();
 const props = defineProps<{ song: Record<string, any>, border: string, icon: string }>();
+let isLoading = ref(false);
 </script>
 <style lang="scss" scoped>
 .activate {
