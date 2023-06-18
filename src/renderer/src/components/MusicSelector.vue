@@ -1,6 +1,9 @@
 <template>
-  <template v-for="(song, index) in   list  ">
-    <MusicCard v-if="index === active" :song="song" :border="getBorderImg(song)" :icon="getIcon(song)"></MusicCard>
+  <template v-for="(song, index) in list">
+    <MusicCard v-if="index === active" :song="song" :border="getBorderImg(song)" :index="index">
+      <img :src="getIcon(song)" class="mx-3">
+      <span class="title" :style="{ color: token.colorText }">{{ song.songTitle }}</span>
+    </MusicCard>
     <div v-else class="wrapper unactivate" :style="{ borderImageSource: `url('${getBorderImg(song)}')` }"
       @click="changeSong(index)">
       <img :src="getIcon(song)" class="mx-3">

@@ -7,3 +7,4 @@ export const voiceCharacterPath = 'sounds/voice/characters/';
 export const unitIconPath = 'images/content/unit/icon/';
 export const musicIconPath = 'images/content/music/icon/';
 export const musicJacketPath = 'images/content/music/jacket/';
+export const concertMusicPath = 'sounds/concert_music/main/';

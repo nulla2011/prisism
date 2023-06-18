@@ -1,8 +1,10 @@
-import { Asset, assets } from '@nulla/prism-core';
+import { Asset, assets } from 'gxmb';
 
-export default async (path: string) => {
+export default async (path: string, hash?: string) => {
   let asset = new Asset(path);
-  //todo: get hash
+  if (hash) {
+    asset.getHash(() => hash);
+  }
   asset.getUrl();
   await asset.fetchFile().catch((e) => {
     throw e;

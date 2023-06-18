@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper activate" :style="{ borderImageSource: `url('${border}')` }">
     <div class="flex h-[50px] items-center">
-      <img :src="icon" class="mx-3">
-      <span class="title" :style="{ color: token.colorText }">{{ song.songTitle }}</span>
+      <slot></slot>
     </div>
     <div class="flex-1 flex">
       <div class="description-box m-2.5 px-4 border border-solid rounded-xl flex flex-col"
@@ -10,7 +9,7 @@
         <div class="artist" :style="{ color: token.colorText }">{{ song.artist }}</div>
         <p class="description" :style="{ color: token.colorText }">{{ song.description }}</p>
       </div>
-      <a-button size="large" shape="circle" type="primary" :loading="isLoading" class="mx-3" @click.stop.prevent="">
+      <a-button size="large" shape="circle" type="primary" :loading="isLoading" class="mx-3" @click.stop.prevent="play">
         <template #icon>
           <play-one theme="outline" size="25" fill="currentcolor" />
         </template>
@@ -19,13 +18,28 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { theme } from 'ant-design-vue';
+import { ref, inject, Ref } from 'vue';
 import { PlayOne } from '@icon-park/vue-next';
+import { concertMusicPath } from '@renderer/shared/constants/paths';
+import { theme } from 'ant-design-vue';
+import useError from '@renderer/store/useError';
+const store = useError();
 const { useToken } = theme;
 const { token } = useToken();
-const props = defineProps<{ song: Record<string, any>, border: string, icon: string }>();
+const props = defineProps<{ song: Record<string, any>, border: string, index: number }>();
+
+const playingIndex = inject<Ref<number>>('now-playing')!;
 let isLoading = ref(false);
+const play = () => {
+  isLoading.value = true;
+  window.api.getAsset(concertMusicPath + props.song.id + '.m4a', props.song.hash).then((file) => {
+    const blob = new Blob([file], { type: 'video/mp4' });
+    playingIndex.value = props.index;
+    isLoading.value = false;
+  }).catch((error) => {
+    store.error = error.message;
+  });
+}
 </script>
 <style lang="scss" scoped>
 .activate {
@@ -58,9 +72,5 @@ let isLoading = ref(false);
   from {
     transform: scale(0);
   }
-}
-
-.title {
-  font-size: 24px;
 }
 </style>

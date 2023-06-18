@@ -13,7 +13,7 @@
   <Error v-if="store.error">{{ store.error }}</Error>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, Ref, provide, watchEffect } from "vue";
 import MusicSelector from '@renderer/components/MusicSelector.vue';
 import useGetUrlHash from "@renderer/shared/composables/useGetUrlHash";
 import { musicJacketPath } from "@renderer/shared/constants/paths";
@@ -21,12 +21,15 @@ import useError from '@renderer/store/useError';
 const store = useError();
 
 let selectedSongIndex = ref(-1);
+let playingSongIndex = ref(-1);
+provide<Ref<number>>('now-playing', playingSongIndex);
 let concertBgms = await window.api.getConcertBgms().catch((error) => {
   store.error = error.message;
 });
 let selectSong = (index: number) => {
   selectedSongIndex.value = index;
 }
+watchEffect(() => console.log(playingSongIndex.value));
 </script>
 <style lang="scss" scoped>
 .all-wrapper {

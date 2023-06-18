@@ -8,14 +8,14 @@ const api = {
   getConcertBgms: () => ipcRenderer.invoke('queryApi', 'concertBgms'),
   clearCache: () => ipcRenderer.send('cache:clear'),
   // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
-  getAsset: (path) => ipcRenderer.invoke('getAsset', path),
+  getAsset: (path, hash?) => ipcRenderer.invoke('getAsset', path, hash),
 };
 
 ipcRenderer.on('version:asset:get', () => {
-  message.loading({ content: 'Getting asset version...', key: 'version:asset' });
+  message.loading({ content: 'Getting Asset Version...', key: 'version:asset' });
 });
-ipcRenderer.on('version:db:get', () => {
-  message.loading({ content: 'Getting DB version...', key: 'version:db' });
+ipcRenderer.on('version:api:get', () => {
+  message.loading({ content: 'Getting Api Version...', key: 'version:api' });
 });
 ipcRenderer.on('version:asset', (event, { assetVersion, isNew }) => {
   if (isNew) {
@@ -24,11 +24,11 @@ ipcRenderer.on('version:asset', (event, { assetVersion, isNew }) => {
     message.info({ content: `Asset version: ${assetVersion}`, key: 'version:asset' });
   }
 });
-ipcRenderer.on('version:db', (event, { dbVersion, isNew }) => {
+ipcRenderer.on('version:api', (event, { apiVersion, isNew }) => {
   if (isNew) {
-    message.success({ content: `New DB version: ${dbVersion}`, key: 'version:db' });
+    message.success({ content: `New Api Version: ${apiVersion}`, key: 'version:api' });
   } else {
-    message.info({ content: `DB version: ${dbVersion}`, key: 'version:db' });
+    message.info({ content: `Api Version: ${apiVersion}`, key: 'version:api' });
   }
 });
 

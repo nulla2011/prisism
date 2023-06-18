@@ -23,11 +23,11 @@
     "@electron-toolkit/preload": "^1.0.3",
     "@electron-toolkit/utils": "^1.0.2",
     "@icon-park/vue-next": "^1.4.2",
-    "@nulla/prism-core": "https://github.com/nulla2011/prism-core/releases/download/v0.3.1/prism-core.tar.gz",
     "ant-design-vue": "4.0.0-rc.5",
     "axios": "^1.3.5",
     "crypto-js": "^4.1.1",
     "electron-updater": "^5.3.0",
+    "gxmb": "^0.4.1",
     "pinia": "^2.0.34",
     "vue-router": "^4.1.6"
   },
