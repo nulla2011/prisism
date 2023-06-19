@@ -19,9 +19,9 @@ ipcRenderer.on('version:api:get', () => {
 });
 ipcRenderer.on('version:asset', (event, { assetVersion, isNew }) => {
   if (isNew) {
-    message.success({ content: `New asset version: ${assetVersion}`, key: 'version:asset' });
+    message.success({ content: `New Asset Version: ${assetVersion}`, key: 'version:asset' });
   } else {
-    message.info({ content: `Asset version: ${assetVersion}`, key: 'version:asset' });
+    message.info({ content: `Asset Version: ${assetVersion}`, key: 'version:asset' });
   }
 });
 ipcRenderer.on('version:api', (event, { apiVersion, isNew }) => {

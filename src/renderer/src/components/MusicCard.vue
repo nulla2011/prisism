@@ -9,11 +9,14 @@
         <div class="artist" :style="{ color: token.colorText }">{{ song.artist }}</div>
         <p class="description" :style="{ color: token.colorText }">{{ song.description }}</p>
       </div>
-      <a-button size="large" shape="circle" type="primary" :loading="isLoading" class="mx-3" @click.stop.prevent="play">
-        <template #icon>
-          <play-one theme="outline" size="25" fill="currentcolor" />
-        </template>
-      </a-button>
+      <a-config-provider :theme="{ token: { colorPrimary: '#6fceeb' } }">
+        <a-button size="large" shape="circle" type="primary" :loading="isLoading" class="mx-3 h-12 w-12"
+          @click.stop.prevent="play">
+          <template #icon>
+            <play-one theme="outline" size="32" fill="currentcolor" />
+          </template>
+        </a-button>
+      </a-config-provider>
     </div>
   </div>
 </template>

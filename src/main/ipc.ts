@@ -5,17 +5,20 @@ import getAsset from './core/getAsset';
 export default () => {
   ipcMain.handle('queryApi', async (event, type, queryValue) => {
     let url;
+    let method;
     switch (type) {
       case 'character':
-        url = `character?id=${queryValue}`;
+        url = `/characterAlbums/characters/${queryValue}`;
+        method = 'POST';
         break;
       case 'concertBgms':
-        url = 'concertBgms.json';
+        url = '/concertBgms?isAll=true';
+        method = 'GET';
         break;
       default:
         break;
     }
-    let resp = await request(url).catch((e) => {
+    let resp = await request(method, url).catch((e) => {
       throw e;
     });
     return resp;

@@ -1,6 +1,6 @@
 <template>
   <div class="all-wrapper h-screen flex">
-    <div class="h-screen w-3/5 overflow-y-auto bg-white/50">
+    <div class="section h-screen w-3/5 overflow-y-auto bg-white/50">
       <MusicSelector :list="concertBgms" @select-song="selectSong"></MusicSelector>
     </div>
     <div class="flex-1 flex">
@@ -23,7 +23,7 @@ const store = useError();
 let selectedSongIndex = ref(-1);
 let playingSongIndex = ref(-1);
 provide<Ref<number>>('now-playing', playingSongIndex);
-let concertBgms = await window.api.getConcertBgms().catch((error) => {
+let concertBgms = await window.api.getConcertBgms().then((data) => data.concertBgms).catch((error) => {
   store.error = error.message;
 });
 let selectSong = (index: number) => {
@@ -35,5 +35,9 @@ watchEffect(() => console.log(playingSongIndex.value));
 .all-wrapper {
   background-image: url('@renderer/assets/image/images-bg-016.jpg');
   background-size: cover;
+}
+
+.section::-webkit-scrollbar {
+  display: none;
 }
 </style>
