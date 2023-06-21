@@ -53,7 +53,6 @@ const changeSong = (index: number) => {
   border-image-width: 1 1 1 1;
   border-image-slice: 10 10 10 10 fill;
   font-family: HummingStd;
-
 }
 
 .unactivate {

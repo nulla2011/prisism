@@ -31,13 +31,17 @@ const { useToken } = theme;
 const { token } = useToken();
 const props = defineProps<{ song: Record<string, any>, border: string, index: number }>();
 
-const playingIndex = inject<Ref<number>>('now-playing')!;
+const playingIndex = inject<{
+  index: number;
+  audioUrl: string;
+}>('now-playing')!;
 let isLoading = ref(false);
 const play = () => {
   isLoading.value = true;
   window.api.getAsset(concertMusicPath + props.song.id + '.m4a', props.song.hash).then((file) => {
     const blob = new Blob([file], { type: 'video/mp4' });
-    playingIndex.value = props.index;
+    playingIndex.audioUrl = URL.createObjectURL(blob);
+    playingIndex.index = props.index;
     isLoading.value = false;
   }).catch((error) => {
     store.error = error.message;

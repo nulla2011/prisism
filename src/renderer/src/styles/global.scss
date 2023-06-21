@@ -2,13 +2,17 @@
   font-family: yuanti;
   src: url("@renderer/assets/font/yuanti.ttf");
 }
+// @font-face {
+//   font-family: HummingStd;
+//   src: url("@renderer/assets/font/primula-HummingStd-E-1.woff2");
+// }
+// @font-face {
+//   font-family: HummingStd;
+//   src: url("@renderer/assets/font/primula-HummingStd-E-2.woff2");
+// }
 @font-face {
   font-family: HummingStd;
-  src: url("@renderer/assets/font/primula-HummingStd-E-1.woff2");
-}
-@font-face {
-  font-family: HummingStd;
-  src: url("@renderer/assets/font/primula-HummingStd-E-2.woff2");
+  src: url("@renderer/assets/font/FOT-HummingStd-E.otf");
 }
 
 :root {
