@@ -2,9 +2,10 @@ import { Asset, ASSETS_URL_PREFIX, hashFileName, getApiVersion } from 'gxmb';
 import { app, BrowserWindow } from 'electron';
 import fs from 'fs';
 import path from 'path';
+import getAssetList from './core/getAssetList';
 
 const ASSET_MAP = 'asset-map.json';
-const getAssetVersion = async () => {
+const getAssetMap = async () => {
   BrowserWindow.fromId(1)!.webContents.send('version:asset:get');
   let assetMap = new Asset(ASSET_MAP);
   assetMap.fixUrl(
@@ -12,8 +13,7 @@ const getAssetVersion = async () => {
   );
   await assetMap.fetchFile();
   await assetMap.decodeFile();
-  let map = JSON.parse(assetMap.data as string);
-  return Number(map.version);
+  return JSON.parse(assetMap.data as string);
 };
 const getApiAndEmVersion = async () => {
   BrowserWindow.fromId(1)!.webContents.send('version:api:get');
@@ -28,6 +28,9 @@ export default async () => {
   let oldApiVersion = fs.existsSync(apiVersionFile)
     ? fs.readFileSync(apiVersionFile, 'utf-8')
     : '0';
+  const { DB, initDB } = await import('./service/sqlite');
+  global.DB = DB;
+  await initDB();
   await getApiAndEmVersion();
   let isApiNew = oldApiVersion !== global.apiVersion.version;
   BrowserWindow.fromId(1)!.webContents.send('version:api', {
@@ -35,8 +38,13 @@ export default async () => {
     isNew: isApiNew,
   });
   if (isApiNew) fs.writeFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
-  let assetVersion = await getAssetVersion();
+  let [assetVersion, chunks] = await getAssetMap().then((map) => {
+    return [map.version, map.chunks];
+  });
   let isAssetNew = oldAssetVersion !== assetVersion;
   BrowserWindow.fromId(1)!.webContents.send('version:asset', { assetVersion, isNew: isAssetNew });
-  if (isAssetNew) fs.writeFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');
+  if (isAssetNew) {
+    fs.writeFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');
+    await getAssetList(chunks);
+  }
 };

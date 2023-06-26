@@ -39,6 +39,7 @@ function createWindow() {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
   }
 }
+setPath();
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -46,7 +47,6 @@ function createWindow() {
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron');
-  setPath();
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
