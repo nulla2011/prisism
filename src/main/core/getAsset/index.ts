@@ -5,7 +5,7 @@ export default async (path: string, hash?: string) => {
   if (hash) {
     asset.getHash(() => hash);
   }
-  asset.getUrl();
+  asset.hashUrl();
   await asset.fetchFile().catch((e) => {
     throw e;
   });

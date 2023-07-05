@@ -4,7 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
 import setPath from './utils/setPath';
 import init from './init';
-import ipc from './ipc';
+import './ipc';
 
 function createWindow() {
   // Create the browser window.
@@ -62,7 +62,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
   init();
-  ipc();
+  // ipc();
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
