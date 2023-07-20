@@ -1,8 +1,10 @@
+import { BrowserWindow } from 'electron';
 import { Asset } from 'gxmb';
 
 export default async (list: { string: number }[]) => {
-  const { DB, appendDB } = await import('../../service/sqlite');
+  const { DB, appendDB, promisifiedDBRun } = await import('../../service/sqlite');
   DB.run('BEGIN TRANSACTION');
+  BrowserWindow.fromId(1)!.webContents.send('DB:writing');
   let tasks: Promise<void>[] = [];
   for (let i = 0; i < list.length; i++) {
     const chunk = new Asset(Object.keys(list[i])[0]);
@@ -16,13 +18,8 @@ export default async (list: { string: number }[]) => {
     );
   }
   await Promise.all(tasks)
-    .then(() =>
-      DB.run('COMMIT', (err) => {
-        if (err) {
-          throw err;
-        }
-      }),
-    )
+    .then(() => promisifiedDBRun('COMMIT'))
+    .then(() => BrowserWindow.fromId(1)!.webContents.send('DB:writeSuccess'))
     .catch((err) => {
       throw err;
     });

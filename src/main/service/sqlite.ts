@@ -8,19 +8,15 @@ export const DB = new sqlite3.Database(dbFlie, (err) => {
     throw err;
   }
 });
-export const initDB = () => {
+export const promisifiedDBRun = (command: string) => {
   return new Promise<void>((resolve, reject) => {
-    DB.run(
-      'CREATE TABLE IF NOT EXISTS assets ( id INTEGER PRIMARY KEY, name VARCHAR (120) NOT NULL, version TINYINT (3) NOT NULL DEFAULT 0)',
-      function (err) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
+    DB.run(command, (err) => (err ? reject(err) : resolve()));
   });
+};
+export const initTable = async () => {
+  await promisifiedDBRun(
+    'CREATE TABLE IF NOT EXISTS assets ( id INTEGER PRIMARY KEY, name VARCHAR (120) NOT NULL, version TINYINT (3) NOT NULL DEFAULT 0)',
+  );
 };
 export const appendDB = (db: sqlite3.Database, data: { [key: string]: number }) => {
   return new Promise<void>((resolve, reject) => {

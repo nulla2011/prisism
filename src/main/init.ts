@@ -28,9 +28,8 @@ export default async () => {
   let oldApiVersion = fs.existsSync(apiVersionFile)
     ? fs.readFileSync(apiVersionFile, 'utf-8')
     : '0';
-  const { DB, initDB } = await import('./service/sqlite');
-  global.DB = DB;
-  await initDB();
+  const { DB, promisifiedDBRun, initTable } = await import('./service/sqlite');
+  // global.DB = DB;
   await getApiAndEmVersion();
   let isApiNew = oldApiVersion !== global.apiVersion.version;
   BrowserWindow.fromId(1)!.webContents.send('version:api', {
@@ -45,6 +44,11 @@ export default async () => {
   BrowserWindow.fromId(1)!.webContents.send('version:asset', { assetVersion, isNew: isAssetNew });
   if (isAssetNew) {
     fs.writeFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');
-    await getAssetList(chunks);
+    promisifiedDBRun('DROP TABLE assets')
+      .then(() => initTable())
+      .then(() => getAssetList(chunks))
+      .catch((e) => console.error(e));
+  } else {
+    initTable();
   }
 };

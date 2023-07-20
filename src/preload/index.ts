@@ -19,7 +19,10 @@ ipcRenderer.on('version:api:get', () => {
 });
 ipcRenderer.on('version:asset', (event, { assetVersion, isNew }) => {
   if (isNew) {
-    message.success({ content: `New Asset Version: ${assetVersion}`, key: 'version:asset' });
+    message.success({
+      content: `New Asset Version: ${assetVersion}, fetching...`,
+      key: 'version:asset',
+    });
   } else {
     message.info({ content: `Asset Version: ${assetVersion}`, key: 'version:asset' });
   }
@@ -30,6 +33,12 @@ ipcRenderer.on('version:api', (event, { apiVersion, isNew }) => {
   } else {
     message.info({ content: `Api Version: ${apiVersion}`, key: 'version:api' });
   }
+});
+ipcRenderer.on('DB:writing', () => {
+  message.loading({ content: 'Writing DB...', key: 'DB:write' });
+});
+ipcRenderer.on('DB:writeSuccess', () => {
+  message.success({ content: 'Write DB success!', key: 'DB:write' });
 });
 
 // Use `contextBridge` APIs to expose Electron APIs to
