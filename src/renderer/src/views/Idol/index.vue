@@ -46,7 +46,7 @@ const id = idols.findIndex((item) => item.roman === (route.params.idolName as st
 // onUnmounted(() => document.body.style.overflow = '');
 let tab = ref<string>('profile')
 // let data = test;
-let data: idol = await window.api.getIdolInfo(id).catch((error) => {
+const data: idol = await window.api.getIdolInfo(id).catch((error) => {
   store.error = error.message;
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <a-config-provider :theme="{
     token: {
-      colorPrimary: '#ff48b4',
+      colorPrimary: '#F925A0',
       colorTextBase: 'rgb(85,73,89)'  // #615365 * 0.88
     },
   }">

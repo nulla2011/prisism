@@ -3,6 +3,7 @@ import MainMenu from '@renderer/views/MainMenu.vue';
 import Commu from '@renderer/views/Commu.vue';
 import Settings from '@renderer/views/Settings.vue';
 import Music from '@renderer/views/Music/index.vue';
+import Background from '@renderer/views/Background/index.vue';
 
 const metaRouters = import.meta.glob('./modules/*.ts', { eager: true, import: 'default' });
 const routeList: RouteRecordRaw[] = [];
@@ -31,6 +32,11 @@ let routes: Array<RouteRecordRaw> = [
     path: '/music',
     name: 'music',
     component: Music,
+  },
+  {
+    path: '/background',
+    name: 'background',
+    component: Background,
   },
 ];
 routes = routes.concat(routeList);

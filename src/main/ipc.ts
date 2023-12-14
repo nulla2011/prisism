@@ -31,3 +31,8 @@ ipcMain.handle('getAsset', async (event, path, hash?) => {
   });
   return resp;
 });
+ipcMain.handle('DB:queryName', async (event, string) => {
+  const { DB, queryDB } = await import('./service/sqlite');
+  const result = await queryDB(DB, string);
+  return result.map((e) => e.name);
+});

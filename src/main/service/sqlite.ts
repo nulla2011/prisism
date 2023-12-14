@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import path from 'path';
+import path, { resolve } from 'path';
 import { app } from 'electron';
 
 const dbFlie = path.join(app.getPath('userData'), 'assets.db');
@@ -31,6 +31,16 @@ export const appendDB = (db: sqlite3.Database, data: { [key: string]: number }) 
         }
         resolve();
       });
+    });
+  });
+};
+export const queryDB = (db: sqlite3.Database, string: string) => {
+  return new Promise<Record<string, any>[]>((resolve, reject) => {
+    db.all(`SELECT * FROM assets WHERE name LIKE '${string}'`, (err, rows: any) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
     });
   });
 };
