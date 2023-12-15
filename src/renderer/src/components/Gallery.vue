@@ -1,6 +1,6 @@
 <template>
   <a-image-preview-group>
-    <a-image v-for="name in list" :width="200" :src="useGetUrlHash(prefix, getFileName(name), 'jpg')" lazy />
+    <a-image v-for="name in list" :width="200" :src="useGetUrlHash(prefix, getFileName(name), 'jpg')" />
   </a-image-preview-group>
 </template>
 <script setup lang="ts">
