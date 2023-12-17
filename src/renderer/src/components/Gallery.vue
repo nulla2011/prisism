@@ -6,35 +6,38 @@
       </div>
     </a-image-preview-group>
   </div>
-  <div ref="marker" @scroll="handleScroll" class="w-10 h-10 bg-black"></div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, Ref, onMounted, onUnmounted } from 'vue';
 import useGetUrlHash from '@renderer/shared/composables/useGetUrlHash';
 import { getFileName } from '@renderer/utils'
 import useError from '@renderer/store/useError';
 const store = useError();
 const props = defineProps<{ prefix: string }>();
 
-const marker = ref<HTMLDivElement | null>(null);
-const handleScroll = () => {
-  if (marker.value) {
-    if (marker.value?.scrollTop + marker.value?.clientHeight >= marker.value?.scrollHeight - 20) {
-      loadmore()
-    }
+// const marker = ref<HTMLDivElement | null>(null);
+onMounted(() => {
+  document.addEventListener('scroll', scrollListener)
+})
+onUnmounted(() => {
+  document.removeEventListener('scroll', scrollListener)
+})
+const scrollListener = (event) => {
+  const doc = document.documentElement
+  if (doc.scrollTop + doc.clientHeight >= doc.scrollHeight - 10) {
+    loadmore()
   }
 }
 const loadmore = () => {
-  imgList = imgList.concat(list.slice(imgLength, imgLength + loadCount));
+  imgList.value = imgList.value.concat(list.slice(imgLength, imgLength + loadCount));
   imgLength += loadCount;
-  console.log(11111);
 }
-const loadCount = 100;
-let imgList: string[] = [];
+const loadCount = 60;
+const imgList: Ref<string[]> = ref([]);
 let imgLength = 0;
-const list: string[] = await window.api.queryDB(`${props.prefix}%`).catch((error) => {
+const list: string[] = await window.api.queryDB(`${props.prefix}%`).then((data) => data.sort((a, b) => parseInt(getFileName(a)) - parseInt(getFileName(b)))).catch((error) => {
   store.error = error.message;
 });
-imgList = list.slice(0, loadCount);
+imgList.value = list.slice(0, loadCount);
 imgLength += loadCount;
 </script>
