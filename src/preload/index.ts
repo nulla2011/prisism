@@ -10,6 +10,7 @@ const api = {
   // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
   getAsset: (path, hash?) => ipcRenderer.invoke('getAsset', path, hash),
   queryDB: (string) => ipcRenderer.invoke('DB:queryName', string),
+  test: () => ipcRenderer.send('test'),
 };
 
 ipcRenderer.on('version:asset:get', () => {

@@ -20,8 +20,9 @@
         <template v-if="!store.error">
           <produce-card v-if="tab === 'produce-idol'" :list="data.produceIdols" />
           <support-card v-if="tab === 'support-idol'" :list="data.supportIdols" />
-          <profile v-if="tab === 'profile'" :data="data" />
-          <voices v-if="tab === 'voices'" :list="data.voices" />
+          <Profile v-if="tab === 'profile'" :data="data" />
+          <Voices v-if="tab === 'voices'" :list="data.voices" />
+          <Costume v-if="tab === 'costume'" />
         </template>
       </div>
     </a-layout-content>
@@ -36,6 +37,7 @@ import ProduceCard from './ProduceCard.vue';
 import SupportCard from './SupportCard.vue';
 import Profile from './Profile.vue';
 import Voices from './Voices.vue';
+import Costume from './Costume.vue';
 // import test from '@renderer/test/test.json';
 import useError from '@renderer/store/useError';
 const store = useError();

@@ -39,6 +39,7 @@ function createWindow() {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
   }
 }
+
 setPath();
 
 // This method will be called when Electron has finished
