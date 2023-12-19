@@ -1,6 +1,7 @@
 import { ipcMain, BrowserWindow } from 'electron';
 import request from './core/request';
 import getAsset from './core/getAsset';
+import createSpineWindow from './spine-window';
 
 ipcMain.handle('queryApi', async (event, type, queryValue) => {
   let url;
@@ -36,4 +37,6 @@ ipcMain.handle('DB:queryName', async (event, string) => {
   const result = await queryDB(DB, string);
   return result.map((line) => line.name);
 });
-ipcMain.on('test', () => {});
+ipcMain.on('test', () => {
+  createSpineWindow();
+});

@@ -30,18 +30,4 @@
     scrollbar-gutter: stable;
   }
 }
-
-.back {
-  background-image: url('@renderer/assets/image/back_button.png');
-  height: 70px;
-  width: 70px;
-  position: fixed;
-  left: 30px;
-  bottom: 30px;
-  z-index: 5;
-
-  &:active {
-    transform: var(--scale-effect);
-  }
-}
 </style>

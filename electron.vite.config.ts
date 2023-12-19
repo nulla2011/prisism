@@ -16,5 +16,18 @@ export default defineConfig({
       },
     },
     plugins: [vue()],
+    build: {
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+          spine: resolve(__dirname, 'spine.html'),
+        },
+        // output:{
+        //   manualChunks:{
+
+        //   }
+        // }
+      },
+    },
   },
 });

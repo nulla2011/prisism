@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import './assets/css/reset.scss';
-import './assets/css/tailwind.css';
-import './styles/global.scss';
+import '../src/assets/css/reset.scss';
+import '../src/assets/css/tailwind.css';
+import '../src/styles/global.scss';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 
