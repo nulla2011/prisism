@@ -22,7 +22,7 @@
           <support-card v-if="tab === 'support-idol'" :list="data.supportIdols" />
           <Profile v-if="tab === 'profile'" :data="data" />
           <Voices v-if="tab === 'voices'" :list="data.voices" />
-          <Costume v-if="tab === 'costume'" />
+          <Costume v-if="tab === 'costume'" :list="data.idolCostumes" />
         </template>
       </div>
     </a-layout-content>
