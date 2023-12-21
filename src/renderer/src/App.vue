@@ -4,7 +4,7 @@
       colorPrimary: '#F925A0',
       colorTextBase: 'rgb(85,73,89)'  // #615365 * 0.88
     },
-  }">
+  }" :autoInsertSpaceInButton='false'>
     <div id="main">
       <RouterView v-slot="{ Component, route }">
         <template v-if="Component">

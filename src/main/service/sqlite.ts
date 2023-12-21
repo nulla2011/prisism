@@ -36,7 +36,7 @@ export const appendDB = (db: sqlite3.Database, data: { [key: string]: number }) 
 };
 export const queryDB = (db: sqlite3.Database, string: string) => {
   return new Promise<Record<string, any>[]>((resolve, reject) => {
-    db.all(`SELECT * FROM assets WHERE name LIKE '${string}'`, (err, rows: any) => {
+    db.all(`SELECT name FROM assets WHERE name LIKE '${string}'`, (err, rows: any) => {
       if (err) {
         reject(err);
       }

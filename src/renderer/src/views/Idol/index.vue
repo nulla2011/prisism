@@ -30,7 +30,7 @@
   <Error v-if="store.error">{{ store.error }}</Error>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import idols from '@renderer/shared/constants/idols';
 import ProduceCard from './ProduceCard.vue';
