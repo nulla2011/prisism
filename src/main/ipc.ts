@@ -37,6 +37,6 @@ ipcMain.handle('DB:queryName', async (event, string) => {
   const result = await queryDB(DB, string);
   return result.map((line) => line.name);
 });
-ipcMain.on('test', () => {
-  createSpineWindow();
+ipcMain.on('window:SpineView', (event, type, id) => {
+  createSpineWindow(type, id);
 });

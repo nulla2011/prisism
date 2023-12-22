@@ -5,6 +5,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       HumStd: 'HummingStd',
+      yuanti: 'yuanti',
     },
   },
   plugins: [],

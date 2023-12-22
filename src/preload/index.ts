@@ -10,7 +10,7 @@ const api = {
   // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
   getAsset: (path, hash?) => ipcRenderer.invoke('getAsset', path, hash),
   queryDB: (string) => ipcRenderer.invoke('DB:queryName', string),
-  test: () => ipcRenderer.send('test'),
+  openSpineView: (type, id) => ipcRenderer.send('window:SpineView', type, id),
 };
 
 ipcRenderer.on('version:asset:get', () => {

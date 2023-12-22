@@ -16,15 +16,15 @@
         <a-dropdown>
           <template #overlay>
             <a-menu @click="handleClick">
-              <a-menu-item key="1">通常</a-menu-item>
-              <a-menu-item key="2">通常 Live</a-menu-item>
-              <a-menu-item key="3">Q版</a-menu-item>
-              <a-menu-item key="4">Q版 Live</a-menu-item>
+              <a-menu-item key="stand"><span class="item">通常</span></a-menu-item>
+              <a-menu-item key="stand_costume"><span class="item">通常 Live</span></a-menu-item>
+              <a-menu-item key="cb"><span class="item">Q版</span></a-menu-item>
+              <a-menu-item key="cb_costume"><span class="item">Q版 Live</span></a-menu-item>
             </a-menu>
           </template>
-          <a-button>Spine 预览</a-button>
+          <a-button class="font-yuanti">Spine 预览</a-button>
         </a-dropdown>
-        <a-button>详细</a-button>
+        <a-button class="font-yuanti">详细</a-button>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@ const { token } = useToken();
 const props = defineProps<{ data: Record<string, any> }>();
 
 const handleClick: MenuProps['onClick'] = (e) => {
-  console.log(e);
+  window.api.openSpineView(e.key, props.data.idolId);
 }
 const getLogo = () => {
   if (props.data.isSkin) {
@@ -71,8 +71,7 @@ hr {
   border-top: 2px dashed #4a424a;
 }
 
-.text {
-  font-family: HummingStd;
-  font-size: 18px;
+.item {
+  font-family: yuanti;
 }
 </style>

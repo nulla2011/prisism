@@ -3,7 +3,7 @@ import { join } from 'path';
 import { is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
 
-export default () => {
+export default (type: string, id: string) => {
   const window = new BrowserWindow({
     minWidth: 1296,
     minHeight: 759,
@@ -22,8 +22,8 @@ export default () => {
     window.show();
   });
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/spine.html`);
+    window.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/spine.html?type=${type}&id=${id}`);
   } else {
-    window.loadFile(join(__dirname, '../renderer/spine.html'));
+    window.loadFile(join(__dirname, '../renderer/spine.html'), { query: { type, id } });
   }
 };

@@ -6,12 +6,14 @@
     },
   }">
     <div id="main">
-      <div>11111</div>
+      <div>{{ `${type} ${id}` }}</div>
     </div>
   </a-config-provider>
 </template>
 <script setup lang="ts">
-
+const s = new URLSearchParams(window.location.search);
+const type = s.get('type');
+const id = s.get('id');
 </script>
 <style lang="scss">
 #main {
