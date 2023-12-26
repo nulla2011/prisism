@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow } from 'electron';
+import { app, shell, BrowserWindow, utilityProcess } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import icon from '../../resources/icon.png?asset';
@@ -41,6 +41,7 @@ function createWindow() {
 }
 
 setPath();
+utilityProcess.fork(join(__dirname, '../server/main.js'));
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

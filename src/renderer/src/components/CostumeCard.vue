@@ -12,8 +12,8 @@
         <div class="flex-1 ml-1 font-HumStd text-[21px]" :style="{ color: token.colorText }">{{ data.name }}</div>
       </div>
       <hr class="flex-none">
-      <div class="flex-1 flex items-center">
-        <a-dropdown>
+      <div class="flex-1 flex justify-end items-center">
+        <a-dropdown class="mr-3">
           <template #overlay>
             <a-menu @click="handleClick">
               <a-menu-item key="stand"><span class="item">通常</span></a-menu-item>
@@ -22,7 +22,10 @@
               <a-menu-item key="cb_costume"><span class="item">Q版 Live</span></a-menu-item>
             </a-menu>
           </template>
-          <a-button class="font-yuanti">Spine 预览</a-button>
+          <a-button class="font-yuanti">
+            <span class="align-top mr-0.5">Spine 预览</span>
+            <down theme="outline" size="22" />
+          </a-button>
         </a-dropdown>
         <a-button class="font-yuanti">详细</a-button>
       </div>
@@ -36,6 +39,7 @@ import iconSkin from '@renderer/assets/image/icon_skin.png';
 import iconRarity4 from '@renderer/assets/image/icon_rarity/icon_l_rarity_4.png'
 import iconRarity3 from '@renderer/assets/image/icon_rarity/icon_l_rarity_3.png'
 import iconRarity2 from '@renderer/assets/image/icon_rarity/icon_l_rarity_2.png'
+import { Down } from '@icon-park/vue-next'
 import type { MenuProps } from 'ant-design-vue';
 import { theme } from 'ant-design-vue';
 const { useToken } = theme;
