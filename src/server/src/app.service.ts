@@ -3,12 +3,10 @@ import { Asset, assets } from 'gxmb';
 import { resolve } from 'path';
 import { outputFile, pathExistsSync, readFileSync } from 'fs-extra';
 
-const folder = 'data';
-
 @Injectable()
 export class AppService {
   async getAsset(path: string, hash?: string) {
-    const filePath = resolve(__dirname, '../', folder, path);
+    const filePath = resolve('Assets', path);
     if (pathExistsSync(filePath)) {
       return readFileSync(filePath);
     } else {

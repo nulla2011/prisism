@@ -15,7 +15,7 @@
 import { ref } from 'vue';
 import useGetUrlHash from '@renderer/shared/composables/useGetUrlHash';
 import MusicCard from '@renderer/components/MusicCard.vue';
-import { unitIconPath, musicIconPath } from '@renderer/shared/constants/paths';
+import { unitIconPath, musicIconPath, musicBasePath } from '@renderer/shared/constants/paths';
 import { theme } from 'ant-design-vue';
 const { useToken } = theme;
 const { token } = useToken();
@@ -24,11 +24,11 @@ const props = defineProps<{ list: Record<string, any>[] }>();
 const emits = defineEmits(['selectSong']);
 let active = ref<number>(-1);
 const getBorderImg = (song: Record<string, string>) => {
-  const prefix = '/src/assets/image/music_base/';
+  const url = `http://127.0.0.1:${import.meta.env.RENDERER_VITE_PORT}/assets/${musicBasePath}`;
   if (song.baseImage) {
-    return prefix + song.baseImage.replace('select_music_base_', '') + '.png';
+    return url + song.baseImage + '.png';
   } else {
-    return prefix + song.unitId + '.png';
+    return url + 'select_music_base_' + song.unitId + '.png';
   }
 }
 const getIcon = (song: Record<string, string>) => {

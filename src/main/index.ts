@@ -5,6 +5,7 @@ import icon from '../../resources/icon.png?asset';
 import setPath from './utils/setPath';
 import init from './init';
 import './ipc';
+import startServer from './start-server';
 
 function createWindow() {
   // Create the browser window.
@@ -41,7 +42,7 @@ function createWindow() {
 }
 
 setPath();
-utilityProcess.fork(join(__dirname, '../server/main.js'));
+startServer();
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

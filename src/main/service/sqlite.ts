@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import path, { resolve } from 'path';
+import path from 'path';
 import { app } from 'electron';
 
 const dbFlie = path.join(app.getPath('userData'), 'assets.db');

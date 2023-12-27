@@ -1,6 +1,6 @@
 import { Asset, ASSETS_URL_PREFIX, hashFileName, getApiVersion } from 'gxmb';
 import { app, BrowserWindow } from 'electron';
-import fs from 'fs';
+import { existsSync, readFileSync, outputFileSync } from 'fs-extra';
 import path from 'path';
 import getAssetList from './core/getAssetList';
 
@@ -22,12 +22,10 @@ const getApiAndEmVersion = async () => {
 export default async () => {
   const assetVersionFile = path.join(app.getPath('userData'), 'asset-version');
   const apiVersionFile = path.join(app.getPath('userData'), 'api-version');
-  let oldAssetVersion = fs.existsSync(assetVersionFile)
-    ? Number(fs.readFileSync(assetVersionFile, 'utf-8'))
+  let oldAssetVersion = existsSync(assetVersionFile)
+    ? Number(readFileSync(assetVersionFile, 'utf-8'))
     : 0;
-  let oldApiVersion = fs.existsSync(apiVersionFile)
-    ? fs.readFileSync(apiVersionFile, 'utf-8')
-    : '0';
+  let oldApiVersion = existsSync(apiVersionFile) ? readFileSync(apiVersionFile, 'utf-8') : '0';
   const { DB, promisifiedDBRun, initTable } = await import('./service/sqlite');
   // global.DB = DB;
   await getApiAndEmVersion();
@@ -36,15 +34,15 @@ export default async () => {
     apiVersion: global.apiVersion.version,
     isNew: isApiNew,
   });
-  if (isApiNew) fs.writeFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
+  if (isApiNew) outputFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
   let [assetVersion, chunks] = await getAssetMap().then((map) => {
     return [map.version, map.chunks];
   });
   let isAssetNew = oldAssetVersion !== assetVersion;
   BrowserWindow.fromId(1)!.webContents.send('version:asset', { assetVersion, isNew: isAssetNew });
   if (isAssetNew) {
-    fs.writeFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');
-    promisifiedDBRun('DROP TABLE assets')
+    outputFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');
+    promisifiedDBRun('DROP TABLE IF EXISTS assets')
       .then(() => initTable())
       .then(() => getAssetList(chunks))
       .catch((e) => console.error(e));

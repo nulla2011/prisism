@@ -10,3 +10,4 @@ export const musicJacketPath = 'images/content/music/jacket/';
 export const concertMusicPath = 'sounds/concert_music/main/';
 export const costumeStandIconPath = 'images/content/idols/costume_stand_icon/';
 export const costumeStandLiveIconPath = 'images/content/idols/costume_stand_live_icon/';
+export const musicBasePath = 'images/content/music/base/';

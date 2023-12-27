@@ -15,9 +15,7 @@ export class AppController {
     @Query() query,
   ) {
     const type = extname(req.path).slice(1);
-    if (contentTypeList[type]) {
-      res.setHeader('Content-Type', contentTypeList[type]);
-    }
+    contentTypeList[type] && res.setHeader('Content-Type', contentTypeList[type]);
     const data = await this.appService.getAsset(req.path.replace('/assets/', ''), query.hash);
     if (typeof data === 'string') {
       return data;

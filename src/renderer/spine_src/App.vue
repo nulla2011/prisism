@@ -6,14 +6,18 @@
     },
   }">
     <div id="main">
-      <div>{{ `${type} ${id}` }}</div>
+      <Suspense>
+        <PixiApp :type="type" :id="id" />
+      </Suspense>
     </div>
   </a-config-provider>
 </template>
 <script setup lang="ts">
+import PixiApp from './PixiApp.vue';
+
 const s = new URLSearchParams(window.location.search);
-const type = s.get('type');
-const id = s.get('id');
+const type = s.get('type')!;
+const id = s.get('id')!;
 </script>
 <style lang="scss">
 #main {
