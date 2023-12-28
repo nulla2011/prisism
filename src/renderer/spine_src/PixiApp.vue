@@ -10,8 +10,12 @@ const props = defineProps<{ type: string, id: string }>();
 const app = new PIXI.Application<HTMLCanvasElement>({ height: 720, width: 750 });
 onMounted(() => document.querySelector('#canvas')!.appendChild(app.view));
 
-const animationName = ref('');
-watch(animationName, (val) => {
+const animationMain = ref('');
+const animationFace = ref('');
+const animationYN = ref('');
+const animationEye = ref('');
+const animationLip = ref('');
+watch(animationMain, (val) => {
   chara.state.setAnimation(1, val, false);
 });
 const URL = `http://localhost:${import.meta.env.RENDERER_VITE_PORT}/assets/spine/idols/${props.type}/${props.id}/data.json`;
