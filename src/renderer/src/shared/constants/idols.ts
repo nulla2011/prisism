@@ -124,4 +124,19 @@ export default [
     unitId: '7',
     roman: 'aketa_mikoto',
   },
+  {
+    name: '斑鳩ルカ',
+    unitId: '8',
+    roman: 'ikaruga_ruka',
+  },
+  {
+    name: '鈴木羽那',
+    unitId: '8',
+    roman: 'suzuki_hana',
+  },
+  {
+    name: '郁田はるき',
+    unitId: '8',
+    roman: 'ikuta_haruki',
+  },
 ];

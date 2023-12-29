@@ -24,7 +24,7 @@ const props = defineProps<{ list: Record<string, any>[] }>();
 const emits = defineEmits(['selectSong']);
 let active = ref<number>(-1);
 const getBorderImg = (song: Record<string, string>) => {
-  const url = `http://127.0.0.1:${import.meta.env.RENDERER_VITE_PORT}/assets/${musicBasePath}`;
+  const url = `http://localhost:${import.meta.env.RENDERER_VITE_PORT}/assets/${musicBasePath}`;
   if (song.baseImage) {
     return url + song.baseImage + '.png';
   } else {

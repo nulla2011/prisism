@@ -6,4 +6,5 @@ export default {
   straylight: 'Straylight',
   noctchill: 'noctchill',
   shhis: 'SHHis',
+  cometik: 'CoMETiK',
 };
