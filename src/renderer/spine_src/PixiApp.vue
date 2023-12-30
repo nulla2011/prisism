@@ -1,11 +1,13 @@
 <template>
-  <div id="canvas" class="overflow-hidden" style="height: 720px; width: 750px"></div>
-  <div class="absolute right-2 top-1">
-    <a-card v-for="anmType in Object.keys(animation)" :title="anmType" size="small" class="w-[516px]">
-      <a-radio-group v-model:value="animation[anmType]" :name="anmType">
-        <a-radio v-for="name in animationList[anmType]" :value="name">{{ name }}</a-radio>
-      </a-radio-group>
-    </a-card>
+  <div class="flex">
+    <div id="canvas" class="overflow-hidden" style="height: 720px; width: 750px"></div>
+    <div class="control flex-1 max-h-[720px] p-1 overflow-y-scroll">
+      <a-card v-for="anmType in Object.keys(animation)" :title="anmType" size="small" class="w-full">
+        <a-radio-group v-model:value="animation[anmType]" :name="anmType">
+          <a-radio v-for="name in animationList[anmType]" :value="name">{{ name }}</a-radio>
+        </a-radio-group>
+      </a-card>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -21,7 +23,7 @@ onMounted(() => document.querySelector('#canvas')!.appendChild(app.view));
 const animation = reactive({
   main: 'blank',
   face: 'blank',
-  yes_or_no: 'blank',
+  status: 'blank',
   eye: 'blank',
   lip: 'blank'
 });
@@ -29,7 +31,7 @@ const isLoop = ref(false);
 watch(animation, (newValue) => {
   chara.state.setAnimation(1, newValue.main, isLoop.value);
   chara.state.setAnimation(2, newValue.face, isLoop.value);
-  chara.state.setAnimation(3, newValue.yes_or_no, isLoop.value);
+  chara.state.setAnimation(3, newValue.status, isLoop.value);
   chara.state.setAnimation(4, newValue.eye, isLoop.value);
   chara.state.setAnimation(5, newValue.lip, isLoop.value);
 })
@@ -48,3 +50,14 @@ chara.scale.set((app.screen.height / asset.spineData.height) * 0.9);
 app.stage.addChild(chara);
 app.renderer.background.color = 0x7f7f7f;
 </script>
+<style lang="scss" scoped>
+.control {
+  &::-webkit-scrollbar {
+    width: 3px
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #999
+  }
+}
+</style>

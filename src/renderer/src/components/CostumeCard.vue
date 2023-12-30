@@ -49,6 +49,21 @@ const props = defineProps<{ data: Record<string, any> }>();
 const handleClick: MenuProps['onClick'] = (e) => {
   window.api.openSpineView(e.key, props.data.idolId);
 }
+let costumeVal = 3;
+if (props.data.isSkin) {
+  switch (props.data.kind) {
+    case 'all':
+      break;
+    case 'plain':
+      costumeVal = 2;
+      break;
+    case 'concert':
+      costumeVal = 1;
+      break;
+    default:
+      break;
+  }
+}
 const getLogo = () => {
   if (props.data.isSkin) {
     return iconSkin
