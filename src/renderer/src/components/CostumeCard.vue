@@ -1,9 +1,9 @@
 <template>
   <div class="card-warp h-[120px] bg-white border border-solid border-[#958e99] rounded-xl flex items-center">
     <img class="w-[110px] h-[110px] ml-2 mr-0.5"
-      :src="useGetUrlHash(costumeStandIconPath, data.idolId, 'png', data.hash)" />
+      :src="(costumeVal & 1) === 1 ? useGetUrlHash(costumeStandIconPath, data.idolId, 'png', data.hash) : costumeNone" />
     <img class="w-[110px] h-[110px] ml-0.5 mr-2"
-      :src="useGetUrlHash(costumeStandLiveIconPath, data.idolId, 'png', data.hash)" />
+      :src="(costumeVal >> 1 & 1) === 1 ? useGetUrlHash(costumeStandLiveIconPath, data.idolId, 'png', data.hash) : costumeNone" />
     <div class="h-[110px] flex-1 flex flex-col mr-2">
       <div class="flex-1 flex items-center">
         <div class="h-[54px] w-[57px] flex justify-center items-center">
@@ -16,10 +16,14 @@
         <a-dropdown class="mr-3">
           <template #overlay>
             <a-menu @click="handleClick">
-              <a-menu-item key="stand"><span class="item">通常</span></a-menu-item>
-              <a-menu-item key="stand_costume"><span class="item">通常 Live</span></a-menu-item>
-              <a-menu-item key="cb"><span class="item">Q版</span></a-menu-item>
-              <a-menu-item key="cb_costume"><span class="item">Q版 Live</span></a-menu-item>
+              <a-menu-item v-if="(costumeVal & 1) === 1" key="stand">
+                <span class="item">通常</span></a-menu-item>
+              <a-menu-item v-if="(costumeVal >> 1 & 1) === 1" key="stand_costume">
+                <span class="item">通常 Live</span></a-menu-item>
+              <a-menu-item v-if="(costumeVal & 1) === 1" key="cb">
+                <span class="item">Q版</span></a-menu-item>
+              <a-menu-item v-if="(costumeVal >> 1 & 1) === 1" key="cb_costume">
+                <span class="item">Q版 Live</span></a-menu-item>
             </a-menu>
           </template>
           <a-button class="font-yuanti">
@@ -39,6 +43,7 @@ import iconSkin from '@renderer/assets/image/icon_skin.png';
 import iconRarity4 from '@renderer/assets/image/icon_rarity/icon_l_rarity_4.png'
 import iconRarity3 from '@renderer/assets/image/icon_rarity/icon_l_rarity_3.png'
 import iconRarity2 from '@renderer/assets/image/icon_rarity/icon_l_rarity_2.png'
+import costumeNone from '@renderer/assets/image/costume_stand_icon_none.png'
 import { Down } from '@icon-park/vue-next'
 import type { MenuProps } from 'ant-design-vue';
 import { theme } from 'ant-design-vue';
@@ -55,12 +60,13 @@ if (props.data.isSkin) {
     case 'all':
       break;
     case 'plain':
-      costumeVal = 2;
-      break;
-    case 'concert':
       costumeVal = 1;
       break;
+    case 'concert':
+      costumeVal = 2;
+      break;
     default:
+      costumeVal = 0;
       break;
   }
 }
