@@ -7,6 +7,7 @@
           <a-radio v-for="name in animationList[anmType]" :value="name">{{ name }}</a-radio>
         </a-radio-group>
       </a-card>
+      <Options v-model:isLoop="isLoop" v-model:bgColor="bgColor" />
     </div>
   </div>
 </template>
@@ -15,7 +16,8 @@ import 'pixi-spine'
 import * as PIXI from 'pixi.js';
 import { Spine } from 'pixi-spine';
 import { ref, onMounted, watch, reactive } from 'vue';
-import useCategorizeAnimation from './composables/useCategorizeAnimation';
+import Options from './Options.vue';
+import useCategorizeAnimation from '../composables/useCategorizeAnimation';
 const props = defineProps<{ type: string, id: string }>();
 const app = new PIXI.Application<HTMLCanvasElement>({ height: 720, width: 750 });
 onMounted(() => document.querySelector('#canvas')!.appendChild(app.view));
@@ -28,12 +30,16 @@ const animation = reactive({
   lip: 'blank'
 });
 const isLoop = ref(false);
-watch(animation, (newValue) => {
-  chara.state.setAnimation(1, newValue.main, isLoop.value);
-  chara.state.setAnimation(2, newValue.face, isLoop.value);
-  chara.state.setAnimation(3, newValue.status, isLoop.value);
-  chara.state.setAnimation(4, newValue.eye, isLoop.value);
-  chara.state.setAnimation(5, newValue.lip, isLoop.value);
+const bgColor = ref('#7f7f7f');
+watch([animation, isLoop], ([newAnm, newIsLoop]) => {
+  chara.state.setAnimation(1, newAnm.main, newIsLoop);
+  chara.state.setAnimation(2, newAnm.face, newIsLoop);
+  chara.state.setAnimation(3, newAnm.status, newIsLoop);
+  chara.state.setAnimation(4, newAnm.eye, newIsLoop);
+  chara.state.setAnimation(5, newAnm.lip, newIsLoop);
+});
+watch(bgColor, (newValue) => {
+  app.renderer.background.color = parseInt(newValue.replace('#', ''), 16);
 })
 const URL = `http://localhost:${import.meta.env.RENDERER_VITE_PORT}/assets/spine/idols/${props.type}/${props.id}/data.json`;
 const asset = await PIXI.Assets.load(URL);
@@ -48,7 +54,7 @@ chara.x = app.screen.width / 2;
 chara.y = app.screen.height / 1.8;
 chara.scale.set((app.screen.height / asset.spineData.height) * 0.9);
 app.stage.addChild(chara);
-app.renderer.background.color = 0x7f7f7f;
+app.renderer.background.color = parseInt(bgColor.value.replace('#', ''), 16);
 </script>
 <style lang="scss" scoped>
 .control {
@@ -59,5 +65,9 @@ app.renderer.background.color = 0x7f7f7f;
   &::-webkit-scrollbar-thumb {
     background: #999
   }
+}
+
+.label {
+  @apply cursor-pointer mx-2 text-base select-none
 }
 </style>

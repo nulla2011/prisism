@@ -7,13 +7,13 @@
   }">
     <div id="main">
       <Suspense>
-        <PixiApp :type="type" :id="id" />
+        <StandPixiApp :type="type" :id="id" />
       </Suspense>
     </div>
   </a-config-provider>
 </template>
 <script setup lang="ts">
-import PixiApp from './PixiApp.vue';
+import StandPixiApp from './components/StandPixiApp.vue';
 
 const s = new URLSearchParams(window.location.search);
 const type = s.get('type')!;
