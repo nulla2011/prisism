@@ -6,8 +6,8 @@
         <label class="label" for="loop">Loop</label>
       </div>
       <div class="w-1/2">
-        <input id="color-picker" type="color" name="Background Color" value="bgColor"
-          @input="$emit('update:color', $event.target!.value)" />
+        <input id="color-picker" type="color" name="Background Color" :value="bgColor"
+          @input="$emit('update:color', ($event.target as HTMLInputElement).value)" />
         <label class="label" for="color-picker">Background Color</label>
       </div>
     </section>
@@ -15,9 +15,9 @@
 </template>
 <script setup lang="ts">
 defineProps<{ isLoop: boolean, bgColor: string }>();
-defineEmits<{ 'update:loop': [isLoop: boolean], 'update:color': [bgColor: string] }>();
+defineEmits<{ (e: 'update:loop', isLoop: boolean): void, (e: 'update:color', bgColor: string): void }>();
 </script>
-<style scoped>
+<style lang="scss" scoped>
 #color-picker {
   border-radius: 3px;
   appearance: auto;
@@ -30,5 +30,9 @@ defineEmits<{ 'update:loop': [isLoop: boolean], 'update:color': [bgColor: string
   border-color: buttonborder;
   border-image: initial;
   padding: 1px 2px;
+}
+
+.label {
+  @apply cursor-pointer mx-2 text-base select-none
 }
 </style>

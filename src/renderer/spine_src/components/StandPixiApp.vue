@@ -66,8 +66,4 @@ app.renderer.background.color = parseInt(bgColor.value.replace('#', ''), 16);
     background: #999
   }
 }
-
-.label {
-  @apply cursor-pointer mx-2 text-base select-none
-}
 </style>
