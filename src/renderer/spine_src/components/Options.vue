@@ -2,12 +2,12 @@
   <a-card>
     <section class="flex items-center">
       <div class="w-1/2">
-        <a-switch id="loop" :checked="isLoop" @checked="$emit('update:loop', $event.target.value)" />
+        <a-switch id="loop" :checked="isLoop" @update:checked="newValue => $emit('update:isLoop', newValue)" />
         <label class="label" for="loop">Loop</label>
       </div>
       <div class="w-1/2">
         <input id="color-picker" type="color" name="Background Color" :value="bgColor"
-          @input="$emit('update:color', ($event.target as HTMLInputElement).value)" />
+          @input="$emit('update:bgColor', ($event.target as HTMLInputElement).value)" />
         <label class="label" for="color-picker">Background Color</label>
       </div>
     </section>
@@ -15,7 +15,7 @@
 </template>
 <script setup lang="ts">
 defineProps<{ isLoop: boolean, bgColor: string }>();
-defineEmits<{ (e: 'update:loop', isLoop: boolean): void, (e: 'update:color', bgColor: string): void }>();
+defineEmits<{ 'update:isLoop': [isLoop: boolean], 'update:bgColor': [bgColor: string] }>();
 </script>
 <style lang="scss" scoped>
 #color-picker {
