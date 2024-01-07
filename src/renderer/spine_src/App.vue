@@ -7,13 +7,15 @@
   }">
     <div id="main">
       <Suspense>
-        <StandPixiApp :type="type" :id="id" />
+        <StandPixiApp v-if="type.startsWith('stand')" :type="type" :id="id" />
+        <CBPixiApp v-else-if="type.startsWith('cb')" :type="type" :id="id" />
       </Suspense>
     </div>
   </a-config-provider>
 </template>
 <script setup lang="ts">
 import StandPixiApp from './components/StandPixiApp.vue';
+import CBPixiApp from './components/CBPixiApp.vue';
 
 const s = new URLSearchParams(window.location.search);
 const type = s.get('type')!;
