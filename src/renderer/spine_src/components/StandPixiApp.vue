@@ -40,21 +40,22 @@ watch([animation, isLoop], ([newAnm, newIsLoop]) => {
 });
 watch(bgColor, (newValue) => {
   app.renderer.background.color = parseInt(newValue.replace('#', ''), 16);
-})
+}, { immediate: true })
+
 const URL = `http://localhost:${import.meta.env.RENDERER_VITE_PORT}/assets/spine/idols/${props.type}/${props.id}/data.json`;
 const asset = await PIXI.Assets.load(URL);
 const animationList = useCategorizeAnimation(asset.spineData.animations.map((item: any) => item.name));
 const chara = new Spine(asset.spineData);
-try {
-  chara.skeleton.setSkinByName('reverse');
-} catch (e) {
-  chara.skeleton.setSkinByName('default');
-}
-chara.x = app.screen.width / 2;
-chara.y = app.screen.height / 1.8;
-chara.scale.set((app.screen.height / asset.spineData.height) * 0.9);
-app.stage.addChild(chara);
-app.renderer.background.color = parseInt(bgColor.value.replace('#', ''), 16);
+const container = new PIXI.Container();
+container.addChild(chara);
+const spineLocalBound = chara.getLocalBounds();
+chara.position.set(-spineLocalBound.x, -spineLocalBound.y);
+const containerLocalBound = container.getLocalBounds();
+container.scale.set(app.view.height / chara.spineData.height * 0.9); //padding for animation
+container.pivot.set(containerLocalBound.width / 2, containerLocalBound.height / 2);
+container.position.set(app.view.width / 2, app.view.height / 2);
+chara.skeleton.setSkinByName('default');
+app.stage.addChild(container);
 </script>
 <style lang="scss" scoped>
 .control {

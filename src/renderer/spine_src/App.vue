@@ -7,8 +7,14 @@
   }">
     <div id="main">
       <Suspense>
-        <StandPixiApp v-if="type.startsWith('stand')" :type="type" :id="id" />
-        <CBPixiApp v-else-if="type.startsWith('cb')" :type="type" :id="id" />
+        <template #default>
+          <StandPixiApp v-if="type.startsWith('stand')" :type="type" :id="id" />
+          <CBPixiApp v-else-if="type.startsWith('cb')" :type="type" :id="id" />
+        </template>
+        <template #fallback>
+          <a-spin size="large"
+            class="fixed top-0 left-0 bottom-0 right-0 z-50 flex flex-col justify-center items-center bg-[#ffffff90]" />
+        </template>
       </Suspense>
     </div>
   </a-config-provider>
