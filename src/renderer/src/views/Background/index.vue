@@ -7,10 +7,10 @@
       <div class="">
         <a-tabs v-model:activeKey="activeKey" type="card" size="large" centered>
           <a-tab-pane key="1" tab="剧情背景">
-            <Gallery prefix="images/event/bg/" />
+            <Gallery key="1" :prefix="eventBGPath" />
           </a-tab-pane>
           <a-tab-pane key="2" tab="待机画面背景">
-            <Gallery prefix="images/content/home_deck_background/bg/" />
+            <Gallery key="2" :prefix="homeDeckBGPath" />
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -19,7 +19,8 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import Gallery from '@renderer/components/Gallery.vue'
-import Title from '@renderer/components/Title.vue'
+import Gallery from '@renderer/components/Gallery.vue';
+import Title from '@renderer/components/Title.vue';
+import { eventBGPath, homeDeckBGPath } from '@renderer/shared/constants/paths';
 const activeKey = ref('1');
 </script>

@@ -4,6 +4,7 @@ import Commu from '@renderer/views/Commu.vue';
 import Settings from '@renderer/views/Settings.vue';
 import Music from '@renderer/views/Music/index.vue';
 import Background from '@renderer/views/Background/index.vue';
+import AssetsView from '@renderer/views/AssetsView.vue';
 
 const metaRouters = import.meta.glob('./modules/*.ts', { eager: true, import: 'default' });
 const routeList: RouteRecordRaw[] = [];
@@ -37,6 +38,11 @@ let routes: Array<RouteRecordRaw> = [
     path: '/background',
     name: 'background',
     component: Background,
+  },
+  {
+    path: '/assets-view',
+    name: 'AssetsView',
+    component: AssetsView,
   },
 ];
 routes = routes.concat(routeList);

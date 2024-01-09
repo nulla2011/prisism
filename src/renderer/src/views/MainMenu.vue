@@ -18,14 +18,19 @@
         </router-link>
       </a-col>
       <a-col :span="8" class="col">
-        <router-link to="/music"><button class="menu-button">
+        <router-link to="/music">
+          <button class="menu-button">
             <span data-text="音乐">音乐</span>
-          </button></router-link></a-col>
-      <a-col :span="8" class="col"><router-link to="/background">
+          </button>
+        </router-link>
+      </a-col>
+      <a-col :span="8" class="col">
+        <router-link to="/background">
           <button class="menu-button">
             <span data-text="背景">背景</span>
           </button>
-        </router-link></a-col>
+        </router-link>
+      </a-col>
     </a-row>
     <a-row justify="space-around" class="mb-16">
       <a-col :span="8" class="col"><button class="menu-button">
@@ -41,13 +46,20 @@
         </button></a-col>
     </a-row>
     <a-row justify="space-around">
-      <a-col :span="8" class="col"><button class="menu-button">
-          <span data-text="资源预览">资源预览</span>
-        </button></a-col>
       <a-col :span="8" class="col">
-        <router-link to="/settings"><button class="menu-button">
+        <router-link to="/assets-view">
+          <button class="menu-button">
+            <span data-text="资源预览">资源预览</span>
+          </button>
+        </router-link>
+      </a-col>
+      <a-col :span="8" class="col">
+        <router-link to="/settings">
+          <button class="menu-button">
             <span data-text="设置">设置</span>
-          </button></router-link></a-col>
+          </button>
+        </router-link>
+      </a-col>
     </a-row>
   </div>
 </template>

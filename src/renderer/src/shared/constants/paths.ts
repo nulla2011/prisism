@@ -11,3 +11,5 @@ export const concertMusicPath = 'sounds/concert_music/main/';
 export const costumeStandIconPath = 'images/content/idols/costume_stand_icon/';
 export const costumeStandLiveIconPath = 'images/content/idols/costume_stand_live_icon/';
 export const musicBasePath = 'images/content/music/base/';
+export const eventBGPath = 'images/event/bg/';
+export const homeDeckBGPath = 'images/content/home_deck_background/bg/';

@@ -1,12 +1,11 @@
 <template>
-  <span class="name select-none">{{ title }}</span>
+  <span :class="`name select-none ${lang === 'ja' ? 'font-HumStd' : 'font-yuanti'}`">{{ title }}</span>
 </template>
 <script setup lang="ts">
-const props = defineProps<{ title: string }>()
+const props = defineProps({ title: String, lang: { type: String, default: 'ja' } })
 </script>
 <style lang="scss" scoped>
 .name {
-  font-family: HummingStd;
   font-size: 24px;
   background-image: url(@renderer/assets/image/common_header_base_l.png);
   height: 56px;

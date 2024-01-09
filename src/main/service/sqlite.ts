@@ -36,11 +36,14 @@ export const appendDB = (db: sqlite3.Database, data: { [key: string]: number }) 
 };
 export const queryDB = (db: sqlite3.Database, string: string) => {
   return new Promise<Record<string, any>[]>((resolve, reject) => {
-    db.all(`SELECT name FROM assets WHERE name LIKE '${string}'`, (err, rows: any) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(rows);
-    });
+    db.all(
+      `SELECT name FROM assets WHERE name LIKE '${string}' ORDER BY name`,
+      (err, rows: any) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(rows);
+      },
+    );
   });
 };

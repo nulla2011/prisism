@@ -1,7 +1,7 @@
 <template>
   <a-layout class="bg-transparent">
     <a-layout-header class="flex items-center justify-between pl-0 pr-5 bg-transparent">
-      <span class="name select-none">{{ data?.name }}</span>
+      <Title :title="data?.name" />
       <a-radio-group size="large" v-model:value="tab" button-style="solid">
         <a-radio-button value="profile" class="button"><span class="tab-name">资料</span></a-radio-button>
         <a-radio-button value="produce-idol" class="button">
@@ -38,7 +38,7 @@ import SupportCard from './SupportCard.vue';
 import Profile from './Profile.vue';
 import Voices from './Voices.vue';
 import Costume from './Costume.vue';
-// import test from '@renderer/test/test.json';
+import Title from '@renderer/components/Title.vue';
 import useError from '@renderer/store/useError';
 const store = useError();
 const route = useRoute();
@@ -54,16 +54,6 @@ const data: idol = await window.api.getIdolInfo(id).catch((error) => {
 </script>
 
 <style lang="scss" scoped>
-.name {
-  font-family: HummingStd;
-  font-size: 24px;
-  background-image: url(@renderer/assets/image/common_header_base_l.png);
-  height: 56px;
-  width: 371px;
-  line-height: 56px;
-  padding-left: 50px;
-}
-
 @import '@renderer/styles/global.scss';
 
 .main-container {

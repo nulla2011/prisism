@@ -24,7 +24,7 @@ onUnmounted(() => {
 })
 const scrollListener = (event) => {
   const doc = document.documentElement
-  if (doc.scrollTop + doc.clientHeight >= doc.scrollHeight - 10) {
+  if (doc.scrollTop + doc.clientHeight >= doc.scrollHeight - 3) {
     loadmore()
   }
 }
@@ -35,7 +35,7 @@ const loadmore = () => {
 const loadCount = 60;
 const imgList: Ref<string[]> = ref([]);
 let imgLength = 0;
-const list: string[] = await window.api.queryDB(`${props.prefix}%`).then((data) => data.sort((a, b) => parseInt(getFileName(a)) - parseInt(getFileName(b)))).catch((error) => {
+const list: string[] = await window.api.queryDB(`${props.prefix}%`).catch((error) => {
   store.error = error.message;
 });
 imgList.value = list.slice(0, loadCount);
