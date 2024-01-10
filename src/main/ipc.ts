@@ -34,7 +34,9 @@ ipcMain.handle('getAsset', async (event, path, hash?) => {
 });
 ipcMain.handle('DB:queryName', async (event, string) => {
   const { DB, queryDB } = await import('./service/sqlite');
-  const result = await queryDB(DB, string);
+  const result = await queryDB(DB, string).catch((e) => {
+    throw e;
+  });
   return result.map((line) => line.name);
 });
 ipcMain.on('window:SpineView', (event, type, id) => {
