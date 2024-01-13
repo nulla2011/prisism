@@ -3,7 +3,7 @@
     <a-layout-header class="flex items-center justify-between pl-0 pr-5 bg-transparent">
       <Title title="资源预览" lang="zh" />
     </a-layout-header>
-    <a-layout-content class="pt-[16px] px-24">
+    <a-layout-content class="pt-[16px] px-[100px]">
       <a-config-provider :theme="{
         token: {
           colorTextBase: 'rgba(0, 0, 0, 0.88)'  // #615365 * 0.88
@@ -19,7 +19,7 @@
   </a-layout>
 </template>
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import Title from '@renderer/components/Title.vue';
 import Assets from '@renderer/components/Assets.vue';
 import { debounce } from 'lodash-es';
@@ -37,5 +37,6 @@ const handleSearch = debounce(async (value: string) => {
     });
     state.data = list.map((n) => { return { value: n } });
   }
-}, 400)
+}, 400);
+
 </script>

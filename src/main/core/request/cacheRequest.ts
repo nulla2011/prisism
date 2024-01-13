@@ -1,25 +1,28 @@
 import { app } from 'electron';
-import { existsSync, mkdirSync, readFileSync, writeFile } from 'fs';
+import { ensureFileSync, existsSync, moveSync, readJsonSync, writeJSON } from 'fs-extra';
 import path from 'path';
 
 const CACHE_PATH = 'Api_Cache';
-const url2path = (url: string) => {
-  let filePath =
+const url2path = (url: string, donotShowExt?: boolean) => {
+  const filePath =
     (url.includes('?') ? path.join(url.split('?')[0], url.split('=')[1]) : url.split('.')[0]) +
-    '.json';
+    (donotShowExt ? '' : '.json');
   return path.join(app.getPath('userData'), CACHE_PATH, filePath);
 };
 export function cacheExist(url: string) {
   return existsSync(url2path(url));
 }
 export function readCache(url: string) {
-  return JSON.parse(readFileSync(url2path(url), 'utf-8'));
+  return readJsonSync(url2path(url));
 }
 export function writeCache(url: string, data, version) {
-  if (!existsSync(path.dirname(url2path(url)))) {
-    mkdirSync(path.dirname(url2path(url)), { recursive: true });
+  if (existsSync(url2path(url))) {
+    const oldVersion = readJsonSync(url2path(url)).version;
+    moveSync(url2path(url), url2path(url, false) + `_v${oldVersion}` + '.json');
+  } else {
+    ensureFileSync(url2path(url));
   }
-  writeFile(url2path(url), JSON.stringify({ version, data }, null, 2), 'utf-8', (e) => {
+  writeJSON(url2path(url), { version, data }, { spaces: 2 }, (e) => {
     if (e) throw e;
   });
 }

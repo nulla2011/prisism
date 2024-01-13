@@ -6,16 +6,19 @@
         <label class="label" for="loop">Loop</label>
       </div>
       <div class="w-1/2">
-        <input id="color-picker" type="color" name="Background Color" :value="bgColor"
-          @input="$emit('update:bgColor', ($event.target as HTMLInputElement).value)" />
+        <input id="color-picker" type="color" name="Background Color" :value="bgColor" @input="handleInput" />
         <label class="label" for="color-picker">Background Color</label>
       </div>
     </section>
   </a-card>
 </template>
 <script setup lang="ts">
+import { throttle } from 'lodash-es';
 defineProps<{ isLoop: boolean, bgColor: string }>();
-defineEmits<{ 'update:isLoop': [isLoop: boolean], 'update:bgColor': [bgColor: string] }>();
+const emit = defineEmits<{ 'update:isLoop': [isLoop: boolean], 'update:bgColor': [bgColor: string] }>();
+const handleInput = throttle((event) => {
+  emit('update:bgColor', (event.target as HTMLInputElement).value)
+}, 150);
 </script>
 <style lang="scss" scoped>
 #color-picker {

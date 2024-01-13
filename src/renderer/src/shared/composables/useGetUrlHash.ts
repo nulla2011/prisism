@@ -10,5 +10,5 @@ export default (path: string, name: string, ext: string, hash?: string) => {
   // const hashArray = Array.from(new Uint8Array(b));
   // const hashedString = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
   const hashedString = sha256(string).toString();
-  return URL_PREFIX + hashedString + (ext === 'mp4' || ext === 'm4a' ? ext : '');
+  return URL_PREFIX + hashedString + (ext === 'mp4' || ext === 'm4a' ? '.' + ext : '');
 };
