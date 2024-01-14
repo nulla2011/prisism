@@ -18,7 +18,7 @@ ipcMain.handle('queryApi', async (event, type, queryValue) => {
     default:
       break;
   }
-  let resp = await request(method, url).catch((e) => {
+  const resp = await request(method, url).catch((e) => {
     throw e;
   });
   return resp;
@@ -27,7 +27,7 @@ ipcMain.on('cache:clear', () => {
   BrowserWindow.fromId(1)!.webContents.session.clearCache();
 });
 ipcMain.handle('getAsset', async (event, path, hash?) => {
-  let resp = await getAsset(path, hash).catch((e) => {
+  const resp = await getAsset(path, hash).catch((e) => {
     throw e;
   });
   return resp;

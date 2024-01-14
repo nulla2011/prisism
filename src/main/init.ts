@@ -3,6 +3,7 @@ import { app, BrowserWindow } from 'electron';
 import { existsSync, readFileSync, outputFileSync } from 'fs-extra';
 import path from 'path';
 import getAssetList from './core/getAssetList';
+import request from './core/request';
 
 const ASSET_MAP = 'asset-map.json';
 const getAssetMap = async () => {
@@ -35,6 +36,7 @@ export default async () => {
     isNew: isApiNew,
   });
   if (isApiNew) outputFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
+  global.hashResources = request('GET', '/hashResources');
   let [assetVersion, chunks] = await getAssetMap().then((map) => {
     return [map.version, map.chunks];
   });
