@@ -11,6 +11,7 @@ const api = {
   getAsset: (path, hash?) => ipcRenderer.invoke('getAsset', path, hash),
   queryDB: (string) => ipcRenderer.invoke('DB:queryName', string),
   openSpineView: (type, id) => ipcRenderer.send('window:SpineView', type, id),
+  queryHash: (category, id) => ipcRenderer.invoke('queryHash', category, id),
 };
 
 ipcRenderer.on('version:asset:get', () => {

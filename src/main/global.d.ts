@@ -1,7 +1,9 @@
-declare global {
-  namespace NodeJS {
-    interface Global {
-      hashResources: Record<string, any[]>;
-    }
-  }
-}
+type hashCategories =
+  | 'characters'
+  | 'comics'
+  | 'concertBgm'
+  | 'idolEvolutionPieces'
+  | 'idols'
+  | 'skins'
+  | 'supportIdols';
+var hashResources: Record<hashCategories, any[]>;

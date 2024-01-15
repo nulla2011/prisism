@@ -36,7 +36,7 @@ export default async () => {
     isNew: isApiNew,
   });
   if (isApiNew) outputFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
-  global.hashResources = request('GET', '/hashResources');
+  request('GET', '/hashResources').then((res) => (global.hashResources = res));
   let [assetVersion, chunks] = await getAssetMap().then((map) => {
     return [map.version, map.chunks];
   });

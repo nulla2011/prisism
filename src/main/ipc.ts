@@ -2,6 +2,7 @@ import { ipcMain, BrowserWindow } from 'electron';
 import request from './core/request';
 import getAsset from './core/getAsset';
 import createSpineWindow from './spine-window';
+import queryHash from './core/queryHash';
 
 ipcMain.handle('queryApi', async (event, type, queryValue) => {
   let url;
@@ -41,4 +42,7 @@ ipcMain.handle('DB:queryName', async (event, string) => {
 });
 ipcMain.on('window:SpineView', (event, type, id) => {
   createSpineWindow(type, id);
+});
+ipcMain.handle('queryHash', (event, category, id) => {
+  return queryHash(category, id);
 });
