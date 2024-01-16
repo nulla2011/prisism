@@ -7,8 +7,8 @@
   </a-card>
 </template>
 <script setup lang="ts">
-let props = defineProps<{ data: { name: string, imagesrc: string, fontSize: number } }>()
-let style = { '--fontSize': props.data.fontSize + 'px' }
+const props = defineProps<{ data: { name: string, imagesrc: string, fontSize: number } }>()
+const style = { '--fontSize': props.data.fontSize + 'px' }
 </script>
 <style lang="scss" scoped>
 .img-container {

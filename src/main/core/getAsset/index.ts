@@ -1,7 +1,7 @@
 import { Asset, assets } from 'gxmb';
 
 export default async (path: string, hash?: string) => {
-  let asset = new Asset(path);
+  const asset = new Asset(path);
   if (hash) {
     asset.getHash(() => hash);
   }

@@ -9,7 +9,7 @@ import { RouteRecordRaw } from 'vue-router';
 //     component: Group,
 //   } as RouteRecordRaw);
 // }
-let groups: RouteRecordRaw[] = [
+const groups: RouteRecordRaw[] = [
   {
     path: '/all-idol',
     component: () => import('@renderer/views/Group.vue'),

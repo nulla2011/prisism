@@ -22,7 +22,7 @@ const { token } = useToken();
 
 const props = defineProps<{ list: Record<string, any>[] }>();
 const emits = defineEmits(['selectSong']);
-let active = ref<number>(-1);
+const active = ref<number>(-1);
 const getBorderImg = (song: Record<string, string>) => {
   const url = `http://localhost:${import.meta.env.RENDERER_VITE_PORT}/assets/${musicBasePath}`;
   if (song.baseImage) {

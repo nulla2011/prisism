@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 
-let card: RouteRecordRaw[] = [
+const card: RouteRecordRaw[] = [
   {
     path: '/card/:id',
     name: 'card',

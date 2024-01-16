@@ -21,7 +21,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, inject, Ref } from 'vue';
+import { ref, inject } from 'vue';
 import { PlayOne } from '@icon-park/vue-next';
 import { concertMusicPath } from '@renderer/shared/constants/paths';
 import { theme } from 'ant-design-vue';
@@ -35,7 +35,7 @@ const playingIndex = inject<{
   index: number;
   audioUrl: string;
 }>('now-playing')!;
-let isLoading = ref(false);
+const isLoading = ref(false);
 const play = () => {
   isLoading.value = true;
   window.api.getAsset(concertMusicPath + props.song.id + '.m4a', props.song.hash).then((file) => {

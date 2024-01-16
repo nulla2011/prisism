@@ -20,7 +20,7 @@ import { unitLogoPath } from "@renderer/shared/constants/paths";
 import useGetUrlHash from "@renderer/shared/composables/useGetUrlHash";
 
 const route = useRoute();
-let groupName = route.params.groupName;
+const groupName = route.params.groupName;
 let idolList;
 if (groupName) {
   idolList = usePickIdols(route.params.groupName as string);

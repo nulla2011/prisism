@@ -10,7 +10,7 @@ export class AppService {
     if (pathExistsSync(filePath)) {
       return readFileSync(filePath);
     } else {
-      let asset = new Asset(path);
+      const asset = new Asset(path);
       if (hash) {
         asset.getHash(() => hash);
       }

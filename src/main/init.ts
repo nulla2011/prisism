@@ -4,11 +4,12 @@ import { existsSync, readFileSync, outputFileSync } from 'fs-extra';
 import path from 'path';
 import getAssetList from './core/getAssetList';
 import request from './core/request';
+import { cacheExists, readCache } from './core/request/cacheRequest';
 
 const ASSET_MAP = 'asset-map.json';
 const getAssetMap = async () => {
   BrowserWindow.fromId(1)!.webContents.send('version:asset:get');
-  let assetMap = new Asset(ASSET_MAP);
+  const assetMap = new Asset(ASSET_MAP);
   assetMap.fixUrl(
     ASSETS_URL_PREFIX + ASSET_MAP.replace('.json', '') + '-' + hashFileName(ASSET_MAP),
   );
@@ -23,24 +24,35 @@ const getApiAndEmVersion = async () => {
 export default async () => {
   const assetVersionFile = path.join(app.getPath('userData'), 'asset-version');
   const apiVersionFile = path.join(app.getPath('userData'), 'api-version');
-  let oldAssetVersion = existsSync(assetVersionFile)
+  const oldAssetVersion = existsSync(assetVersionFile)
     ? Number(readFileSync(assetVersionFile, 'utf-8'))
     : 0;
-  let oldApiVersion = existsSync(apiVersionFile) ? readFileSync(apiVersionFile, 'utf-8') : '0';
+  const oldApiVersion = existsSync(apiVersionFile) ? readFileSync(apiVersionFile, 'utf-8') : '0';
+  let needHash = false;
+  if (cacheExists('/hashResources')) {
+    global.hashResources = readCache('/hashResources').data;
+  } else {
+    needHash = true;
+  }
   const { DB, promisifiedDBRun, initTable } = await import('./service/sqlite');
   // global.DB = DB;
   await getApiAndEmVersion();
-  let isApiNew = oldApiVersion !== global.apiVersion.version;
+  const isApiNew = oldApiVersion !== global.apiVersion.version;
   BrowserWindow.fromId(1)!.webContents.send('version:api', {
     apiVersion: global.apiVersion.version,
     isNew: isApiNew,
   });
-  if (isApiNew) outputFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
-  request('GET', '/hashResources').then((res) => (global.hashResources = res));
-  let [assetVersion, chunks] = await getAssetMap().then((map) => {
+  if (isApiNew) {
+    outputFileSync(apiVersionFile, global.apiVersion.version, 'utf-8');
+    needHash = true;
+  }
+  if (needHash) {
+    request('GET', '/hashResources').then((res) => (global.hashResources = res));
+  }
+  const [assetVersion, chunks] = await getAssetMap().then((map) => {
     return [map.version, map.chunks];
   });
-  let isAssetNew = oldAssetVersion !== assetVersion;
+  const isAssetNew = oldAssetVersion !== assetVersion;
   BrowserWindow.fromId(1)!.webContents.send('version:asset', { assetVersion, isNew: isAssetNew });
   if (isAssetNew) {
     outputFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');

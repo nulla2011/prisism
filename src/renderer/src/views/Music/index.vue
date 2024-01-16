@@ -9,5 +9,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Song from './Song.vue';
-let tab = ref('song');
+const tab = ref('song');
 </script>

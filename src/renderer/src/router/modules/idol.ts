@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 import { defineAsyncComponent } from 'vue';
 
-let idols: RouteRecordRaw[] = [
+const idols: RouteRecordRaw[] = [
   {
     path: '/idol/:idolName',
     name: 'idol',

@@ -36,11 +36,11 @@ import { Play, PauseOne, VolumeNotice, VolumeMute } from '@icon-park/vue-next';
 import { onMounted, ref, watch } from 'vue';
 const props = defineProps<{ url: string, title: string }>();
 
-let audioPlayer = ref<HTMLMediaElement | null>();
-let isPlaying = ref(false);
-let duration = ref(0);
-let currentTime = ref(0);
-let isMute = ref(false);
+const audioPlayer = ref<HTMLMediaElement | null>();
+const isPlaying = ref(false);
+const duration = ref(0);
+const currentTime = ref(0);
+const isMute = ref(false);
 watch(() => props.url, () => {
   isPlaying.value = true;
   duration.value = Math.floor(audioPlayer.value!.duration);

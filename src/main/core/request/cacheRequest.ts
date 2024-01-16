@@ -9,15 +9,15 @@ const url2path = (url: string, donotShowExt?: boolean) => {
     (donotShowExt ? '' : '.json');
   return path.join(app.getPath('userData'), CACHE_PATH, filePath);
 };
-export function cacheExist(url: string) {
+export function cacheExists(url: string) {
   return existsSync(url2path(url));
 }
 export function readCache(url: string) {
   return readJsonSync(url2path(url));
 }
 export function writeCache(url: string, data, version) {
-  if (existsSync(url2path(url))) {
-    const oldVersion = readJsonSync(url2path(url)).version;
+  if (cacheExists(url)) {
+    const oldVersion = readCache(url).version;
     moveSync(url2path(url), url2path(url, false) + `_v${oldVersion}` + '.json');
   } else {
     ensureFileSync(url2path(url));

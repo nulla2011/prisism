@@ -22,13 +22,13 @@ import { musicJacketPath } from "@renderer/shared/constants/paths";
 import useError from '@renderer/store/useError';
 const store = useError();
 
-let selectedSongIndex = ref(-1);
-let nowPlaying = reactive({ index: -1, audioUrl: '' });
+const selectedSongIndex = ref(-1);
+const nowPlaying = reactive({ index: -1, audioUrl: '' });
 provide('now-playing', nowPlaying);
-let concertBgms = await window.api.getConcertBgms().then((data) => data.concertBgms).catch((error) => {
+const concertBgms = await window.api.getConcertBgms().then((data) => data.concertBgms).catch((error) => {
   store.error = error.message;
 });
-let selectSong = (index: number) => {
+const selectSong = (index: number) => {
   selectedSongIndex.value = index;
 }
 </script>

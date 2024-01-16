@@ -32,12 +32,12 @@ const props = defineProps<{ list: Record<string, any>[] }>();
 const voiceKey = (voice: Record<string, string>) => {
   return voice.voice || `duo_${voice.voiceId.substring(1, 7)}`
 }
-let booleanObj: Record<number, boolean> = {};
+const booleanObj: Record<number, boolean> = {};
 for (const el of props.list) {
   booleanObj[voiceKey(el)] = false;
 }
-let isLoading = reactive(booleanObj);
-let audiosrc = ref('');
+const isLoading = reactive(booleanObj);
+const audiosrc = ref('');
 const charId = props.list[0].voiceId.substring(3, 6);
 const play = (voice: Record<string, any>) => {
   const key = voiceKey(voice);
@@ -57,8 +57,8 @@ const play = (voice: Record<string, any>) => {
     const char2 = voice.voiceId.substring(4, 7);
     let url1 = '';
     let url2 = '';
-    let path1 = voiceCharacterPath + char1 + `/mypage_talking_duo_${char1}${char2}0010010.m4a`;
-    let path2 = voiceCharacterPath + char2 + `/mypage_talking_duo_${char1}${char2}0010020.m4a`;
+    const path1 = voiceCharacterPath + char1 + `/mypage_talking_duo_${char1}${char2}0010010.m4a`;
+    const path2 = voiceCharacterPath + char2 + `/mypage_talking_duo_${char1}${char2}0010020.m4a`;
     Promise.all([
       window.api.getAsset(path1).then((file) => {
         const blob = new Blob([file], { type: 'video/mp4' });
