@@ -13,3 +13,4 @@ export const costumeStandLiveIconPath = 'images/content/idols/costume_stand_live
 export const musicBasePath = 'images/content/music/base/';
 export const eventBGPath = 'images/event/bg/';
 export const homeDeckBGPath = 'images/content/home_deck_background/bg/';
+export const comics = 'images/content/comics/';

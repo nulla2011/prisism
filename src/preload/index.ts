@@ -6,6 +6,7 @@ import { message } from 'ant-design-vue';
 const api = {
   getIdolInfo: (id) => ipcRenderer.invoke('queryApi', 'character', id),
   getConcertBgms: () => ipcRenderer.invoke('queryApi', 'concertBgms'),
+  getComics: () => ipcRenderer.invoke('queryApi', 'comics'),
   clearCache: () => ipcRenderer.send('cache:clear'),
   // axiosError: (callback) => ipcRenderer.on('err:axios', callback),
   getAsset: (path, hash?) => ipcRenderer.invoke('getAsset', path, hash),

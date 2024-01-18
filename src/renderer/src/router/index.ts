@@ -5,6 +5,7 @@ import Settings from '@renderer/views/Settings.vue';
 import Music from '@renderer/views/Music/index.vue';
 import Background from '@renderer/views/Background/index.vue';
 import AssetsView from '@renderer/views/AssetsView.vue';
+import Comic from '@renderer/views/Comic/index.vue';
 
 const metaRouters = import.meta.glob('./modules/*.ts', { eager: true, import: 'default' });
 const routeList: RouteRecordRaw[] = [];
@@ -43,6 +44,11 @@ let routes: Array<RouteRecordRaw> = [
     path: '/assets-view',
     name: 'AssetsView',
     component: AssetsView,
+  },
+  {
+    path: '/comic',
+    name: 'Comic',
+    component: Comic,
   },
 ];
 routes = routes.concat(routeList);

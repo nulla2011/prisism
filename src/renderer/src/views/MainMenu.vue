@@ -41,9 +41,13 @@
             <span data-text="剧情">剧情</span>
           </button>
         </router-link></a-col>
-      <a-col :span="8" class="col"><button class="menu-button">
-          <span data-text="四格漫画">四格漫画</span>
-        </button></a-col>
+      <a-col :span="8" class="col">
+        <router-link to="/comic">
+          <button class="menu-button">
+            <span data-text="四格漫画">四格漫画</span>
+          </button>
+        </router-link>
+      </a-col>
     </a-row>
     <a-row justify="space-around">
       <a-col :span="8" class="col">

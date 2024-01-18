@@ -16,6 +16,9 @@ ipcMain.handle('queryApi', async (event, type, queryValue) => {
       url = '/concertBgms?isAll=true';
       method = 'GET';
       break;
+    case 'comics':
+      url = '/comics';
+      method = 'GET';
     default:
       break;
   }

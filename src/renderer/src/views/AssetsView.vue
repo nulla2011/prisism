@@ -1,6 +1,6 @@
 <template>
   <a-layout class="bg-transparent">
-    <a-layout-header class="flex items-center justify-between pl-0 pr-5 bg-transparent">
+    <a-layout-header class="flex items-center pl-0 pr-5 bg-transparent">
       <Title title="资源预览" lang="zh" />
     </a-layout-header>
     <a-layout-content class="pt-[16px] px-[100px]">

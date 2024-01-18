@@ -1,3 +1,1 @@
-<template>
-  111111
-</template>
+<template></template>
