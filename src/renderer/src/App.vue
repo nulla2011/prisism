@@ -9,15 +9,17 @@
       <RouterView v-slot="{ Component, route }">
         <template v-if="Component">
           <button v-show="$route.name !== 'home'" class="back" @click="$router.back()"></button>
-          <Suspense timeout="0">
-            <template #default>
-              <component :is="Component" :key="route.path"></component>
-            </template>
-            <template #fallback>
-              <a-spin size="large"
-                class="fixed top-0 left-0 bottom-0 right-0 z-50 flex flex-col justify-center items-center bg-[#ffffff90]" />
-            </template>
-          </Suspense>
+          <KeepAlive>
+            <Suspense timeout="0">
+              <template #default>
+                <component :is="Component" :key="route.path"></component>
+              </template>
+              <template #fallback>
+                <a-spin size="large"
+                  class="fixed top-0 left-0 bottom-0 right-0 z-50 flex flex-col justify-center items-center bg-[#ffffff90]" />
+              </template>
+            </Suspense>
+          </KeepAlive>
         </template>
       </RouterView>
     </div>
@@ -26,7 +28,7 @@
 <script setup lang="ts">
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 #main {
   // min-width: 1280px;
   min-height: 720px;

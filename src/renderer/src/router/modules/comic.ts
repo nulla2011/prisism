@@ -4,7 +4,7 @@ import { defineAsyncComponent } from 'vue';
 const comics: RouteRecordRaw[] = [
   {
     path: '/comic/:id',
-    name: 'comic',
+    name: 'comicViewer',
     component: defineAsyncComponent(() => import('@renderer/views/Comic/Viewer.vue')),
   },
 ];

@@ -7,14 +7,14 @@
       <section class="w-full h-[600px] px-5 bg-white border-2 border-solid rounded-xl border-[#958e99]">
         <div class="mt-12 mb-24 grid grid-cols-4 gap-y-12">
           <div v-for="comic in currentList" class="comic" :key="comic.id">
-            <router-link :to="{ name: 'comic', params: { id: comic.id } }">
+            <router-link :to="{ name: 'comicViewer', params: { id: comic.id } }">
               <div class="pt-1 pb-[3px] text-center font-yuanti text-white text-base">{{ `第${comic.chapter}话` }}</div>
               <img width="183" class="ml-[3px]"
                 :src="useGetUrlHash(`${comicsPath}${comic.category}/icon/`, comic.id, 'jpg', comic.hash)" />
             </router-link>
           </div>
         </div>
-        <a-pagination class="text-center" v-model:current="current" :total="data.comics.length" :showSizeChanger="false"
+        <a-pagination class="text-center" v-model:current="current" :total="comics.length" :showSizeChanger="false"
           :pageSize="8" show-quick-jumper />
       </section>
     </a-layout-content>
@@ -30,10 +30,10 @@ const store = useError();
 
 const current = ref(1);
 const currentList = ref<Record<string, any>[]>([]);
-const data = await window.api.getComics().catch((error) => {
+const comics = await window.api.getComics().then((res) => res.comics.sort((a, b) => b.displayPriority - a.displayPriority)).catch((error) => {
   store.error = error.message;
 });
-watch(current, (value) => currentList.value = data.comics.slice((value - 1) * 8, value * 8), { immediate: true });
+watch(current, (value) => currentList.value = comics.slice((value - 1) * 8, value * 8), { immediate: true });
 </script>
 <style lang="scss" scoped>
 .comic {

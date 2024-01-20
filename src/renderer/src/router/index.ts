@@ -47,7 +47,7 @@ let routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/comic',
-    name: 'Comic',
+    name: 'comic',
     component: Comic,
   },
 ];
