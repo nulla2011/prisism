@@ -3,8 +3,9 @@
     <div class="info mx-8 mt-8 text-center text-2xl px-6" :style="{ color: token.colorText }">
       <p class="font-yuanti mt-3"> {{ `第${comic.chapter}话` }}</p>
       <p class="font-HumStd"> {{ comic.title }}</p>
-      <hr class="my-3 border border-[#4a424a] border-solid">
+      <hr class="my-3 border border-[#958e99] border-solid">
       <p class="font-yuanti">登场人物</p>
+      <p class="font-HumStd" v-for="char in comic.comicCharacters">{{ char.name }}</p>
     </div>
     <div class="h-screen flex-1 overflow-y-scroll">
       <img :src="useGetUrlHash(`${comicsPath}${comic.category}/page/`, comic.id, 'jpg', comic.hash)" />
