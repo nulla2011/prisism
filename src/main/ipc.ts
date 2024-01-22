@@ -1,4 +1,4 @@
-import { ipcMain, BrowserWindow } from 'electron';
+import { app, ipcMain, BrowserWindow } from 'electron';
 import request from './core/request';
 import getAsset from './core/getAsset';
 import createSpineWindow from './spine-window';
@@ -48,4 +48,14 @@ ipcMain.on('window:SpineView', (event, type, id) => {
 });
 ipcMain.handle('queryHash', (event, category, id) => {
   return queryHash(category, id);
+});
+ipcMain.handle('version', () => {
+  return {
+    assetVersion: global.assetVersion,
+    apiVersion: global.apiVersion?.version,
+  };
+});
+ipcMain.on('app:restart', () => {
+  app.relaunch();
+  app.quit();
 });

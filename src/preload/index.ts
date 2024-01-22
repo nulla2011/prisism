@@ -13,6 +13,8 @@ const api = {
   queryDB: (string) => ipcRenderer.invoke('DB:queryName', string),
   openSpineView: (type, id) => ipcRenderer.send('window:SpineView', type, id),
   queryHash: (category, id) => ipcRenderer.invoke('queryHash', category, id),
+  gameVersions: () => ipcRenderer.invoke('version'),
+  restart: () => ipcRenderer.send('app:restart'),
 };
 
 ipcRenderer.on('version:asset:get', () => {

@@ -54,6 +54,7 @@ export default async () => {
   });
   const isAssetNew = oldAssetVersion !== assetVersion;
   BrowserWindow.fromId(1)!.webContents.send('version:asset', { assetVersion, isNew: isAssetNew });
+  global.assetVersion = assetVersion;
   if (isAssetNew) {
     outputFileSync(assetVersionFile, assetVersion.toString(), 'utf-8');
     promisifiedDBRun('DROP TABLE IF EXISTS assets')

@@ -33,9 +33,9 @@
       </a-col>
     </a-row>
     <a-row justify="space-around" class="mb-16">
-      <a-col :span="8" class="col"><button class="menu-button">
+      <!-- <a-col :span="8" class="col"><button class="menu-button">
           <span data-text="衣装">衣装</span>
-        </button></a-col>
+        </button></a-col> -->
       <a-col :span="8" class="col">
         <router-link to="/commu"><button class="menu-button">
             <span data-text="剧情">剧情</span>
@@ -48,8 +48,6 @@
           </button>
         </router-link>
       </a-col>
-    </a-row>
-    <a-row justify="space-around">
       <a-col :span="8" class="col">
         <router-link to="/assets-view">
           <button class="menu-button">
@@ -57,6 +55,8 @@
           </button>
         </router-link>
       </a-col>
+    </a-row>
+    <a-row justify="space-around">
       <a-col :span="8" class="col">
         <router-link to="/settings">
           <button class="menu-button">
