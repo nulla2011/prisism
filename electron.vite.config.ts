@@ -19,8 +19,8 @@ export default defineConfig({
     build: {
       rollupOptions: {
         input: {
-          main: resolve(__dirname, 'index.html'),
-          spine: resolve(__dirname, 'spine.html'),
+          main: resolve('src/renderer/index.html'),
+          spine: resolve('src/renderer/spine.html'),
         },
         // output:{
         //   manualChunks:{

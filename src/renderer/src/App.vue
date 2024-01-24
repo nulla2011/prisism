@@ -9,7 +9,7 @@
       <RouterView v-slot="{ Component, route }">
         <template v-if="Component">
           <button v-show="$route.name !== 'home'" class="back" @click="$router.back()"></button>
-          <KeepAlive>
+          <KeepAlive include="Comic,AssetsView">
             <Suspense timeout="0">
               <template #default>
                 <component :is="Component" :key="route.path"></component>

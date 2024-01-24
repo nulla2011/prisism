@@ -17,7 +17,7 @@ function createWindow() {
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : { icon }),
-    title: 'prism',
+    title: 'prisism',
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,

@@ -28,6 +28,9 @@ import { comics as comicsPath } from '@renderer/shared/constants/paths';
 import useError from '@renderer/store/useError';
 const store = useError();
 
+defineOptions({
+  name: 'Comic'
+})
 const current = ref(1);
 const currentList = ref<Record<string, any>[]>([]);
 const comics = await window.api.getComics().then((res) => res.comics.sort((a, b) => b.displayPriority - a.displayPriority)).catch((error) => {

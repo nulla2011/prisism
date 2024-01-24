@@ -12,7 +12,7 @@ export default (type: string, id: string) => {
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : { icon }),
-    title: 'prism',
+    title: 'prisism spine viewer',
     // webPreferences: {
     //   preload: join(__dirname, '../preload/index.js'),
     //   sandbox: false,

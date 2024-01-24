@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import MainMenu from '@renderer/views/MainMenu.vue';
 import Commu from '@renderer/views/Commu.vue';
 import Settings from '@renderer/views/Settings.vue';
@@ -53,7 +53,7 @@ let routes: Array<RouteRecordRaw> = [
 ];
 routes = routes.concat(routeList);
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
