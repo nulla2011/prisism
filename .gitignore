@@ -6,7 +6,5 @@ out
 *.old
 ae_project
 src/renderer/src/assets/font
-build
 electron*.mjs
-resources
 src/renderer/test
